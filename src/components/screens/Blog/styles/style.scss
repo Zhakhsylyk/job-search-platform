@@ -1,0 +1,21 @@
+
+
+.blog__header {
+    margin-top: 118px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 18px;
+    font-size: 3.125rem;
+
+    p {
+        margin-bottom:0;
+    }
+
+
+    &_keywords {
+        display: flex;
+        align-items: center;
+    }
+}
