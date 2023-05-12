@@ -61,15 +61,86 @@
                 height: 362px;
                 box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.0835598);
                 border-radius: 8px;
-                padding: 17px 22px;
+                padding: 17px 35px;
 
                 &_title {
+                    text-align: center;
                     font-size: 1.125rem;
                     font-weight: 600;
+                }
+
+                &_list {
+
+
+                    &__title {
+                        color: #9B9B9B;
+                        text-transform: uppercase;
+                        margin: 0;
+                    }
+
+                    &__short {
+                        color: #111210;
+                        font-weight: 600;
+                        margin: 0;
+
+                        &--selected {
+                            font-weight: 600;
+                            color: #4540DB;
+                            margin: 0;
+
+                        }
+                    }
+                }
+            }
+
+            &-popular {
+                &_list {
+                    &__item {
+                        display: flex;
+                        align-items: center;
+                        gap: 26px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &-recent {
+                &_list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 30px;
+                    padding-left: 5px;
+
+                    &__item {
+                        cursor: pointer;
+
+                    }
                 }
             }
 
         }
 
+        &_keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+    }
+
+    &__keyword {
+
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.0835598);
+        padding: 9px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        img {
+            cursor: pointer;
+        }
     }
 }

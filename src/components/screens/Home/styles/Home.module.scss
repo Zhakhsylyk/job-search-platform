@@ -127,20 +127,20 @@ select option {
 }
 
 select option[value="rub"] {
-    background-image: url('../../../../images/russia.png');
+    background-image: url('../../../../assets/images/russia.png');
     background-size: 20px;
     background-position-x: 5px;
 }
 
 select option[value="usd"] {
-    background-image: url('../../../../images/usa.png');
+    background-image: url('../../../../assets/images/usa.png');
     background-size: 20px;
     background-position-x: 5px;
 }
 
 
 select option[value="kzt"] {
-    background-image: url('../../../../images/kazakhstan.png');
+    background-image: url('../../../../assets/images/kazakhstan.png');
     background-size: 20px;
     background-position-x: 5px;
 }
@@ -177,7 +177,7 @@ select option {
     font-weight: 500;
 
     &::before {
-        content: url('../../../../images/upload.svg');
+        content: url('../../../../assets/icons/upload.svg');
         margin-right: 11px;
     }
 }

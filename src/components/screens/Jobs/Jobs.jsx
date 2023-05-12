@@ -3,8 +3,7 @@ import { Footer } from '../../footer/Footer'
 import Header from '../../header/Header'
 import { Navigation } from '../../navigation/Navigation';
 import menu from '../../../images/menu.svg';
-import { candidates } from '../../../constants/candidates';
-import { CandidateCard, VacancyCard } from '../../card/Card';
+import {  VacancyCard } from '../../card/Card';
 import { Pagination } from '../../pagination/Pagination';
 import RangeSlider from '../../slider/Slider';
 import { vacancies } from '../../../constants/vacancies';

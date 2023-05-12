@@ -1,0 +1,33 @@
+.profile {
+    &__main {
+        margin-top: 140px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &_inner {
+            display: flex;
+            align-items: center;
+            gap:50px;
+
+            img {
+                border-radius: 50%;
+            }
+
+            & > div > span {
+                font-weight: 700;
+                font-size: 1.25rem;
+            }
+
+            p {
+                font-size: 1.25rem;
+                
+                & > span {
+                    font-weight: 500;
+                    color:#000000;
+                }
+            }
+        }
+
+    }
+}
