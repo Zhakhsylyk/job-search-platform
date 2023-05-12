@@ -30,10 +30,12 @@ function Header() {
             <div>
                 <ul >
                     <li className={styles.li}>
-                        <Link to="/account" className={styles.link}>Log In</Link>
+                        <Link to="/signin" className={styles.link}>Log In</Link>
                     </li>
                     <li>
-                        <button className={styles.btn}>Register Now</button>
+                        <Link to='/signup'>
+                            <button className={styles.btn}>Register Now</button>
+                        </Link>
                     </li>
                 </ul>
             </div>
