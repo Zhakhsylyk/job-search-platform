@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Header from "../../header/Header";
 import "./styles/style.scss";
 import avatar from "../../../images/candidate.png";
@@ -12,6 +12,7 @@ import { jobs } from "../../../constants/jobs";
 import { Footer } from "../../footer/Footer";
 
 export const Profile = () => {
+  
   const Main = () => {
     return (
       <div className="profile__main">

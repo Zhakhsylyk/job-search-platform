@@ -9,6 +9,8 @@ import Login from "./components/screens/Login/Login";
 import Register from "./components/screens/Register/Register";
 import Error from "./components/screens/404/404";
 import { ToastContainer } from "react-toastify";
+import Loader from "./components/loader/Loader";
+
 
 function App() {
   return (

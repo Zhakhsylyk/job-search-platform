@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Card.module.scss";
 import kolesa from "../../images/jobIcon.svg";
 import candidate from "../../images/candidate.png";
@@ -6,8 +6,16 @@ import checkPrimary from "../../images/check-primary.svg";
 import check from "../../images/check.svg";
 
 export const CategoryCard = ({ data }) => {
+  const [selected, setSelected] = useState(false);
+  const onMouseEnter = () => {
+    setSelected(true);
+  }
+
+  const onMouseLeave = () => {
+    setSelected(false);
+  }
   return (
-    <div className={styles["card__category"]}>
+    <div className={styles[!selected ? "card__category" : 'card__category--selected']} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <div className={styles["card__category_inner"]} key={data.id}>
         <div>
           {" "}

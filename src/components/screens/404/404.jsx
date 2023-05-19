@@ -21,10 +21,10 @@ export default function Error() {
                             404
                         </Typography>
                         <Typography variant="h6">
-                            The page you’re looking for doesn’t exist.
+                            The page you're looking for doesn't exist.
                         </Typography>
                         <Link to="/">
-                            <Button variant="contained" sx={{marginTop:'0.95rem'}}>Back Home</Button>
+                            <Button variant="contained" sx={{ marginTop: '0.95rem' }}>Back Home</Button>
                         </Link>
                     </Grid>
                     <Grid xs={6}>

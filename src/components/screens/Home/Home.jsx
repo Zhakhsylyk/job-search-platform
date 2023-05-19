@@ -14,6 +14,8 @@ import { subscriptions } from "../../../constants/subscriptions";
 import resumeLogo from "../../../images/cvPicture.png";
 import { Footer } from "../../footer/Footer";
 import Select, { components } from "react-select";
+import { useTranslation } from "react-i18next";
+
 
 const countries = [
   { value: "KZT", label: "KZT", icon: kzFlag },
@@ -36,9 +38,14 @@ const Option = (props) => (
 
 export const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+  const { t, i18n } = useTranslation();
 
   const handleChange = (value) => {
     setSelectedCountry(value);
+  };
+
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
   };
 
   const SingleValue = ({ children, ...props }) => (

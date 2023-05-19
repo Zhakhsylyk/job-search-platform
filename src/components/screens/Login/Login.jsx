@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,7 +12,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { api, handleError } from "../../../services";
+import { apiService, handleError, handleSuccess } from "../../../services";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signIn } from "../../../store/actions/account";
+import Loader from "../../loader/Loader";
 
 function Copyright(props) {
   return (
@@ -35,6 +39,9 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,7 +49,8 @@ export default function Login() {
       username: data.get("email"),
       password: data.get("password"),
     };
-    const res = await api.post("/signin", body).catch(handleError);
+    // const res = await apiService.post('/users/signin?password=client&username=client').then(res => navigate('/')).catch(res => navigate('/'), handleError);
+    dispatch(signIn(body))
   };
 
   return (
