@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./Footer.module.scss";
 import logo from "../../images/jalda-logo.png";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+  const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
       <div
@@ -21,10 +23,11 @@ export const Footer = () => {
           display: "flex",
           alignItems: "center",
           gap: 75,
+          padding:50
         }}
       >
-        <p style={{ fontSize: "3.125rem", width: 434 }}>
-          Never Want to Miss Any <span>Job News?</span>
+        <p style={{ fontSize: "3.125rem", width: 534}}>
+          {t('footer.text')} <span>{t('footer.primary')}</span>
         </p>
         <div
           style={{
@@ -38,8 +41,8 @@ export const Footer = () => {
             padding: "5px 6px",
           }}
         >
-          <input type="text" placeholder="Enter your email..." />
-          <button className={styles["btn"]}>Subscribe</button>
+          <input type="text" placeholder={t('footer.placeholder')} />
+          <button className={styles["btn"]}>{t('footer.button')}</button>
         </div>
       </div>
       <div

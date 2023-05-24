@@ -44,10 +44,6 @@ export const Home = () => {
     setSelectedCountry(value);
   };
 
-  const changeLanguage = (language) => {
-    i18n.changeLanguage(language);
-  };
-
   const SingleValue = ({ children, ...props }) => (
     <components.SingleValue {...props}>
       <img
@@ -64,15 +60,28 @@ export const Home = () => {
   const MainBody = () => {
     return (
       <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
-        <div>
-          <p className={styles.title}>
-            Get The <span>Right Job</span> <br />
-            You Deserve with AI
-          </p>
-          <p className={styles.subtitle}>
-            1000 jobs & 500 candidates are registered
-          </p>
-        </div>
+        {i18n.language !== 'kk' ? (
+          <div>
+            <p className={styles.title}>
+              {t('title.index')} <span>{t('title.primary')}</span> <br />
+              {t('title.next')}
+            </p>
+            <p className={styles.subtitle}>
+              {t('subtitle')}
+            </p>
+          </div>
+        ) : (
+          <div>
+            <p className={styles.title}>
+              {t('title.index')} <br />
+              <span>{t('title.primary')}</span> {t('title.next')}
+            </p>
+            <p className={styles.subtitle}>
+              {t('subtitle')}
+            </p>
+          </div>
+        )
+        }
         <div>
           <img
             src={jobSearch}
@@ -89,7 +98,7 @@ export const Home = () => {
     return (
       <div className={styles.search}>
         <img src={searchIcon} alt="search" width={35} height={35} />
-        <input type="text" placeholder="Search Title or Keyword" />
+        <input type="text" placeholder={t('searchTitle')} />
         <div className={styles.dividerLine} />
         <img
           src={locationIcon}
@@ -98,8 +107,8 @@ export const Home = () => {
           height={35}
           style={{ marginLeft: 20 }}
         />
-        <input type="text" placeholder="Search Location" />
-        <button className={styles.btn}>Search</button>
+        <input type="text" placeholder={t('searchLocation')} />
+        <button className={styles.btn}>{t('search')}</button>
       </div>
     );
   };
@@ -107,8 +116,8 @@ export const Home = () => {
     return (
       <div className={styles["section__category"]}>
         <p style={{ textAlign: "center", fontSize: 50, fontWeight: 500 }}>
-          One Platform <br />
-          Many <span>Solutions</span>
+          {t('category.title')}<br />
+          {t('category.titleNext')} <span>{t('category.primary')}</span>
         </p>
         <div
           style={{
@@ -139,7 +148,7 @@ export const Home = () => {
             margin: "78px 0 100px 0",
           }}
         >
-          Newest <span>Jobs</span> For You{" "}
+          {t('job.title')} <span>{t('job.primary')}</span> {t('job.titleNext')}
         </p>
         <div
           style={{
@@ -170,7 +179,7 @@ export const Home = () => {
             cursor: "pointer",
           }}
         >
-          Find More Jobs
+          {t('job.button')}
         </button>
       </div>
     );
@@ -180,39 +189,9 @@ export const Home = () => {
     return (
       <div className={styles["section__subscription"]}>
         <p style={{ textAlign: "center", fontSize: 50, fontWeight: 500 }}>
-          Our pricing <span>subscriptions</span>
+          {t('subscription.title')} <span>{t('subscription.primary')}</span>
         </p>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 26,
-            marginBottom: 45,
-          }}
-        >
-          <p style={{ color: "#170F49", fontSize: "1.125rem" }}>
-            Choose your currency
-          </p>
-          <Select
-            defaultValue={{ label: "KZT", value: "KZT" }}
-            value={selectedCountry}
-            options={countries}
-            onChange={handleChange}
-            styles={{
-              singleValue: (base) => ({
-                ...base,
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-              }),
-            }}
-            components={{
-              Option,
-              SingleValue,
-            }}
-          />
-        </div>
+
         <div
           style={{
             display: "flex",
@@ -258,14 +237,12 @@ export const Home = () => {
           <img src={resumeLogo} alt="" />
           <div>
             <p className={styles["resume__title"]}>
-              Get Matched The Most Valuable Jobs, Just Drop Your CV at Staffing
-              Solutions
+              {t('resume.text')}
             </p>
             <p className={styles["resume__subtitle"]}>
-              In the subject line of email, write your name, the description of
-              the position you want to apply
+              {t('resume.subtext')}
             </p>
-            <button className={styles["resume__btn"]}>Upload Your CV</button>
+            <button className={styles["resume__btn"]}>{t('resume.button')}</button>
           </div>
         </div>
       </div>

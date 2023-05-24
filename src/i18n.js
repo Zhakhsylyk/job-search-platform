@@ -10,7 +10,6 @@ i18n
     .init({
         resources: locales,
         debug: true,
-        lng: 'en',
-        fallbackLng: 'ru',
+        lng: localStorage.getItem('lng') ?? 'en',
     });
 export default i18n;

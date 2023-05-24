@@ -1,3 +1,50 @@
 {
-    "title": "en"
+    "navigation": {
+        "home": "Home",
+        "jobs": "Find jobs",
+        "candidates": "Find candidates",
+        "articles": "Blog",
+        "login": "Log In",
+        "register": "Register Now"
+    },
+    "title": {
+        "index": "Get The",
+        "primary": "Right Job",
+        "next": "You Deserve with AI"
+    },
+    "subtitle": "1000 jobs & 500 candidates are registered",
+    "search": "Search",
+    "searchTitle": "Search Title or Keyword",
+    "searchLocation": "Search Location",
+    "category": {
+        "title": "One Platform",
+        "titleNext": "Many",
+        "primary": "Solutions"
+    },
+    "job": {
+        "title": "Newest",
+        "primary": "Jobs",
+        "titleNext": "For You",
+        "month": "month",
+        "apply": "Apply now",
+        "button": "Find More Jobs"
+    },
+    "subscription": {
+        "title": "Our pricing",
+        "primary": "subscriptions",
+        "month": "monthly",
+        "included": "What's included",
+        "button": "Get Started"
+    },
+    "resume": {
+        "text": "Get Matched The Most Valuable Jobs, Just Drop Your CV at Staffing Solutions",
+        "subtext": "In the subject line of email, write your name, the description of the position you want to apply",
+        "button": "Upload Your CV"
+    },
+    "footer": {
+        "text": "Never Want to Miss Any",
+        "primary": "Job News?",
+        "placeholder": "Enter your email...",
+        "button":"Subscribe"
+    }
 }
