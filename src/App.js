@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { Home } from "./components/screens/Home/Home";
 import { Candidates } from "./components/screens/Candidates/Candidates";
 import { Jobs } from "./components/screens/Jobs/Jobs";
@@ -11,9 +16,7 @@ import Error from "./components/screens/404/404";
 import { ToastContainer } from "react-toastify";
 import Loader from "./components/loader/Loader";
 import { Article } from "./components/screens/Blog/article/Article";
-import Checkout from "./components/screens/Profile/form/checkout/Checkout";
-
-
+import Form from "./components/screens/Profile/form";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -30,12 +33,13 @@ function App() {
 
     handleRouteChange();
 
-    return () => {
-    };
+    return () => {};
   }, [location]);
   return (
     <>
-      {loading ? <Loader /> :
+      {loading ? (
+        <Loader />
+      ) : (
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/jobs" element={<Jobs />} />
@@ -45,10 +49,10 @@ function App() {
           <Route path="/me" element={<Profile />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
-          <Route path="/resume" element={<Checkout />} />
+          <Route path="/resume" element={<Form />} />
           <Route path="*" element={<Error />} />
         </Routes>
-      }
+      )}
       <ToastContainer />
     </>
   );

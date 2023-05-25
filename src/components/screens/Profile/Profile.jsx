@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import Header from "../../header/Header";
 import "./styles/style.scss";
 import avatar from "../../../images/candidate.png";
@@ -11,9 +11,17 @@ import { JobCard } from "../../card/Card";
 import { jobs } from "../../../constants/jobs";
 import { Footer } from "../../footer/Footer";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Dropzone from "../../dragndrop";
+import Button from "@mui/material/Button";
 
 export const Profile = () => {
+  const { t } = useTranslation();
+  const [uploadBox, setUploadBox] = useState(false);
 
+  const uploadResumeHandler = () => {
+    setUploadBox(true);
+  };
   const Main = () => {
     return (
       <div className="profile__main">
@@ -22,22 +30,46 @@ export const Profile = () => {
           <div>
             <span>Alikhan Zhakhsylyk</span>
             <p>
-              username: <span>azhakhsylyk</span>{" "}
+              {t("profile.username")}: <span>azhakhsylyk</span>{" "}
             </p>
             <p>
-              Email: <span>azhakhsylyk@gmail.com</span>{" "}
+              {t("profile.email")}: <span>azhakhsylyk@gmail.com</span>{" "}
             </p>
           </div>
         </div>
-
-        <div className="profile__main_outer-block">
-          <Link to="/resume">
-            <div className="profile__main_outer-block__item">Start a new resume</div>
-          </Link>
-          <div className="profile__main_outer-block__item">
-            Upload existing resume
+        {!uploadBox ? (
+          <div className="profile__main_outer-block">
+            <Link to="/resume">
+              <div className="profile__main_outer-block__item">
+                {t("profile.create")}
+              </div>
+            </Link>
+            <div
+              className="profile__main_outer-block__item"
+              onClick={uploadResumeHandler}
+            >
+              {t("profile.upload")}
+            </div>
           </div>
-        </div>
+        ) : (
+          <>
+            <Dropzone accept={"application/pdf"} />
+            <div
+              style={{
+                display: "flex",
+                gap: 10,
+                marginTop: -60,
+              }}
+            >
+              <Button variant="contained" color="success" size="large">
+                Save
+              </Button>
+              <Button variant="contained" color="error" size="large">
+                Cancel
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     );
   };
@@ -46,7 +78,7 @@ export const Profile = () => {
       <div className="profile__recommendations">
         <div className="profile__recommendations_title">
           <div className="profile__recommendations_side"></div>
-          <p>Recommendations</p>
+          <p> {t("profile.recommendations")}</p>
           <div className="profile__recommendations_side"></div>
         </div>
         <div className="profile__recommendations_list">

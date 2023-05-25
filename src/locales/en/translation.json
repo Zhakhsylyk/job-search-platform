@@ -118,5 +118,12 @@
         "notification": "I want to receive inspiration, marketing promotions and updates via email",
         "button": "Sign up",
         "login": "Already have an account? Sign in"
+    },
+    "profile" : {
+        "username":"Username",
+        "email":"Email",
+        "create":"Start a new resume",
+        "upload":"Upload existing resume",
+        "recommendations":"Recommendations"
     }
 }
