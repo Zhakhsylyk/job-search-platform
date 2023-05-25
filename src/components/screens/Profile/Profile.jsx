@@ -10,9 +10,10 @@ import document from "../../../images/document.svg";
 import { JobCard } from "../../card/Card";
 import { jobs } from "../../../constants/jobs";
 import { Footer } from "../../footer/Footer";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
-  
+
   const Main = () => {
     return (
       <div className="profile__main">
@@ -28,35 +29,14 @@ export const Profile = () => {
             </p>
           </div>
         </div>
-        <div className="profile__main_outer">
-          <div className="profile__main_outer-path">
-            <div className="profile__main_outer-path__step">
-              <img src={profile} alt="profile" />
-            </div>
-            <div className="profile__main_outer-path__step">
-              <img src={assessment} alt="assessment" />
-            </div>
-            <div className="profile__main_outer-path__step">
-              <img src={document} alt="document" />
-            </div>
-            <div className="profile__main_outer-path__step">
-              <img src={attach} alt="attach" />
-            </div>
-            <div className="profile__main_outer-path__step">
-              <img src={loop} alt="loop" />
-            </div>
-          </div>
-        </div>
+
         <div className="profile__main_outer-block">
-          <div className="profile__main_outer-block__item">Create Profile</div>
+          <Link to="/resume">
+            <div className="profile__main_outer-block__item">Start a new resume</div>
+          </Link>
           <div className="profile__main_outer-block__item">
-            Take Career Assessment
+            Upload existing resume
           </div>
-          <div className="profile__main_outer-block__item">Build Resume</div>
-          <div className="profile__main_outer-block__item">
-            Upload documents
-          </div>
-          <div className="profile__main_outer-block__item">Launch search</div>
         </div>
       </div>
     );

@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../../store/actions/account";
 import Loader from "../../loader/Loader";
+import { useTranslation } from "react-i18next";
 
 function Copyright(props) {
   return (
@@ -39,6 +40,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,7 +52,7 @@ export default function Login() {
       password: data.get("password"),
     };
     // const res = await apiService.post('/users/signin?password=client&username=client').then(res => navigate('/')).catch(res => navigate('/'), handleError);
-    dispatch(signIn(body))
+    dispatch(signIn(body)).then(() => navigate('/me'))
   };
 
   return (
@@ -69,7 +71,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            {t('login.title')}
           </Typography>
           <Box
             component="form"
@@ -83,7 +85,7 @@ export default function Login() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label= {t('login.email')}
               name="email"
               autoComplete="email"
               autoFocus
@@ -94,14 +96,14 @@ export default function Login() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label= {t('login.password')}
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label= {t('login.remember')}
             />
             <Button
               type="submit"
@@ -109,17 +111,17 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+            {t('login.button')}
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="/forgot" variant="body2">
-                  Forgot password?
+                {t('login.forgot')}
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                {t('login.signup')}
                 </Link>
               </Grid>
             </Grid>

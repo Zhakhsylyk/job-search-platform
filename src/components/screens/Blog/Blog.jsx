@@ -6,8 +6,10 @@ import { Pagination } from '../../pagination/Pagination';
 import { Box } from './box/Box';
 import './styles/style.scss';
 import { SideBar } from './panel/SideBar';
+import { useTranslation } from 'react-i18next';
 
 export const Blog = () => {
+    const { t } = useTranslation();
     const Hashtag = ({ children }) => {
         return (
             <div style={{ color: '#4943DA', border: '2px solid #4943DA', padding: '10px 20px', borderRadius: 20, display: 'flex', justifyContent: 'center', alignItems: 'center' }}><p style={{ fontSize: '1.125rem', margin: 0 }}>{children}</p></div>
@@ -16,7 +18,7 @@ export const Blog = () => {
     const BlogHeader = () => {
         return (
             <div className='blog__header'>
-                <p>Relevant <span>News</span> And More For You</p>
+                <p>{t('blog.title')} <span>{t('blog.primary')}</span> {t('blog.subtitle')}</p>
                 <div className='blog__header_keywords'>
                     <Hashtag>Recruitment</Hashtag>
                     <Hashtag>IT</Hashtag>

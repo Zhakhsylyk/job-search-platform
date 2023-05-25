@@ -10,8 +10,10 @@ import { Pagination } from "../../pagination/Pagination";
 import RangeSlider from "../../slider/Slider";
 import { vacancies } from "../../../constants/vacancies";
 import "./style.scss";
+import { useTranslation } from "react-i18next";
 
 export const Jobs = () => {
+  const { t } = useTranslation();
   const JobsCatalog = () => {
     return (
       <div className="job__container">
@@ -19,11 +21,11 @@ export const Jobs = () => {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p>Showing 1-20 of 522 candidates </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <p>Sort by:</p>
+              <p>{t('main.sort')}:</p>
               <select>
-                <option>Newest</option>
-                <option>Oldest</option>
-                <option>Random</option>
+                <option>{t('main.new')}</option>
+                <option>{t('main.old')}</option>
+                <option>{t('main.random')}</option>
               </select>
               <img src={menu} alt="menu" />
             </div>
@@ -52,7 +54,7 @@ export const Jobs = () => {
           </div>
         </div>
         <div className="job__sidebar">
-          <p>Location</p>
+          <p>{t('sidebar.location')}</p>
           <div className="job__sidebar_input-wrapper">
             <div className="job__sidebar_input-icon">
               {" "}
@@ -60,7 +62,7 @@ export const Jobs = () => {
             </div>
             <input
               type="text"
-              placeholder="Astana"
+              placeholder={t('sidebar.locationText')}
               style={{
                 border: "1px solid #DDDDDD",
                 height: 48,
@@ -71,7 +73,7 @@ export const Jobs = () => {
             />
           </div>
 
-          <p>Category</p>
+          <p>{t('sidebar.category')}</p>
           <div className="job__sidebar_input-wrapper">
             <div className="job__sidebar_input-icon">
               {" "}
@@ -79,7 +81,7 @@ export const Jobs = () => {
             </div>
             <input
               type="text"
-              placeholder="Backend"
+              placeholder={t('sidebar.categoryText')}
               style={{
                 border: "1px solid #DDDDDD",
                 height: 48,
@@ -89,7 +91,7 @@ export const Jobs = () => {
               className="job__sidebar_input"
             />
           </div>
-          <p>Experience</p>
+          <p>{t('sidebar.experience.title')}</p>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex" }}>
               <input
@@ -98,7 +100,7 @@ export const Jobs = () => {
                 name="base"
                 style={{ width: "10%" }}
               />
-              <label for="scales">0-2 years</label>
+              <label for="scales">{t('sidebar.experience.junior')}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -107,7 +109,7 @@ export const Jobs = () => {
                 name="medium"
                 style={{ width: "10%" }}
               />
-              <label for="medium">10-12 years</label>
+              <label for="medium">{t('sidebar.experience.middle')}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -116,7 +118,7 @@ export const Jobs = () => {
                 name="advanced"
                 style={{ width: "10%" }}
               />
-              <label for="advanced">16-20 years</label>
+              <label for="advanced">{t('sidebar.experience.senior')}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -125,10 +127,10 @@ export const Jobs = () => {
                 name="pro"
                 style={{ width: "10%" }}
               />
-              <label for="pro">20-25 years</label>
+              <label for="pro">{t('sidebar.experience.expert')}</label>
             </div>
           </div>
-          <p>Experience Level</p>
+          <p>{t('sidebar.experienceLevel.title')}</p>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex" }}>
               <input
@@ -137,7 +139,7 @@ export const Jobs = () => {
                 name="expert"
                 style={{ width: "10%" }}
               />
-              <label for="expert">Expert</label>
+              <label for="expert">{t('sidebar.experienceLevel.expert')}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -146,7 +148,7 @@ export const Jobs = () => {
                 name="senior"
                 style={{ width: "10%" }}
               />
-              <label for="senior">Senior</label>
+              <label for="senior">{t('sidebar.experienceLevel.senior')}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -155,7 +157,7 @@ export const Jobs = () => {
                 name="junior"
                 style={{ width: "10%" }}
               />
-              <label for="junior">Junior</label>
+              <label for="junior">{t('sidebar.experienceLevel.junior')}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -164,7 +166,7 @@ export const Jobs = () => {
                 name="middle"
                 style={{ width: "10%" }}
               />
-              <label for="middle">Middle</label>
+              <label for="middle">{t('sidebar.experienceLevel.middle')}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -173,14 +175,14 @@ export const Jobs = () => {
                 name="internship"
                 style={{ width: "10%" }}
               />
-              <label for="internship">Internship</label>
+              <label for="internship">{t('sidebar.experienceLevel.internship')}</label>
             </div>
           </div>
-          <p>Salary range</p>
+          <p>{t('sidebar.salaryRange')}</p>
           <RangeSlider />
           <div style={{ display: "flex", marginTop: 32 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              <span className="range__title">From</span>
+              <span className="range__title">{t('sidebar.from')}</span>
               <input
                 type="text"
                 placeholder="1600"
@@ -193,7 +195,7 @@ export const Jobs = () => {
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              <span className="range__title">To</span>
+              <span className="range__title">{t('sidebar.to')}</span>
               <input
                 type="text"
                 placeholder="1600"
@@ -207,8 +209,8 @@ export const Jobs = () => {
             </div>
           </div>
           <div style={{ position: "absolute", bottom: 16 }}>
-            <button>Apply Filter</button>
-            <button>Reset Filter</button>
+            <button>{t('sidebar.apply')}</button>
+            <button>{t('sidebar.reset')}</button>
           </div>
         </div>
       </div>

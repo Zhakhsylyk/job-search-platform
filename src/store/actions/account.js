@@ -3,6 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../constants/api";
 import { apiService } from "../../services";
 import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -32,6 +34,7 @@ export const usersSlice = createSlice({
             .addCase(signIn.fulfilled, (state, action) => {
                 state.status = "succeeded"
                 state.users = state.users.concat(action.payload);
+          
             })
             .addCase(signIn.rejected, (state, action) => {
                 state.status = "failed"

@@ -45,6 +45,78 @@
         "text": "Never Want to Miss Any",
         "primary": "Job News?",
         "placeholder": "Enter your email...",
-        "button":"Subscribe"
+        "button": "Subscribe",
+        "about": "About",
+        "jobs": "Jobs",
+        "contact": "Contact"
+    },
+    "searchbar": {
+        "title": "There are 1.999 Jobs Here For you!",
+        "placeholder": "Backend developer",
+        "button": "Find Now"
+    },
+    "main": {
+        "show": "Showing",
+        "candidates": "candidates",
+        "sort": "Sort by",
+        "new": "Newest",
+        "old": "Oldest",
+        "random": "Random"
+    },
+    "sidebar": {
+        "location": "Location",
+        "category": "Category",
+        "locationText": "Astana",
+        "categoryText": "Backend",
+        "experience": {
+            "title": "Experience",
+            "junior": "0-2 years",
+            "middle": "10-12 years",
+            "senior": "16-20 years",
+            "expert": "20-25 years"
+        },
+        "experienceLevel": {
+            "title": "Experience Level",
+            "expert": "Expert",
+            "senior": "Senior",
+            "junior": "Junior",
+            "middle": "Middle",
+            "internship": "Internship"
+        },
+        "salaryRange": "Salary range",
+        "from": "From",
+        "to": "To",
+        "apply": "Apply Filter",
+        "reset": "Reset Filter"
+    },
+    "candidate": {
+        "view": "View Profile"
+    },
+    "blog": {
+        "title": "Relevant",
+        "subtitle": "And More For You",
+        "primary": "News",
+        "search": "Search your recipes...",
+        "popular": "POPULAR POST",
+        "recent": "RECENT POST"
+    },
+    "login": {
+        "title": "Sign in",
+        "email": "Email Address",
+        "password": "Password",
+        "remember": "Remember me",
+        "button": "sign in",
+        "forgot": "Forgot password?",
+        "signup": "Don't have an account? Sign up"
+    },
+    "register": {
+        "title": "Sign up",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "email": "Email Address",
+        "password": "Password",
+        "notification": "I want to receive inspiration, marketing promotions and updates via email",
+        "button": "Sign up",
+        "login": "Already have an account? Sign in"
     }
 }

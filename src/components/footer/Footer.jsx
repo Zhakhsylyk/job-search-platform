@@ -23,10 +23,10 @@ export const Footer = () => {
           display: "flex",
           alignItems: "center",
           gap: 75,
-          padding:50
+          padding: 50
         }}
       >
-        <p style={{ fontSize: "3.125rem", width: 534}}>
+        <p style={{ fontSize: "3.125rem", width: 534 }}>
           {t('footer.text')} <span>{t('footer.primary')}</span>
         </p>
         <div
@@ -64,9 +64,9 @@ export const Footer = () => {
           <img src={logo} alt="jalda" witdh={36} height={36} />
           <div>
             <ul>
-              <li>About</li>
-              <li>Jobs</li>
-              <li>Contact</li>
+              <li>{t('footer.about')}</li>
+              <li>{t('footer.jobs')}</li>
+              <li>{t('footer.contact')}</li>
             </ul>
           </div>
           <div style={{ marginRight: 0, marginLeft: "auto" }}>

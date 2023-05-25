@@ -11,12 +11,14 @@ import Error from "./components/screens/404/404";
 import { ToastContainer } from "react-toastify";
 import Loader from "./components/loader/Loader";
 import { Article } from "./components/screens/Blog/article/Article";
+import Checkout from "./components/screens/Profile/form/checkout/Checkout";
 
 
 
 function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  // const loadingTime = window.location.href.includes('resume') ? 3000 : 500;
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -43,6 +45,7 @@ function App() {
           <Route path="/me" element={<Profile />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
+          <Route path="/resume" element={<Checkout />} />
           <Route path="*" element={<Error />} />
         </Routes>
       }
