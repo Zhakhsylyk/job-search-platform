@@ -11,7 +11,7 @@ export const Footer = () => {
         style={{
           position: "absolute",
           height: 214,
-          width: "73vw",
+          width: '53vw',
           background: "#FFF",
           boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.25)",
           margin: "0 auto",
@@ -26,7 +26,7 @@ export const Footer = () => {
           padding: 50
         }}
       >
-        <p style={{ fontSize: "3.125rem", width: 534 }}>
+        <p style={{ fontSize: "2.125rem", width: 534 }}>
           {t('footer.text')} <span>{t('footer.primary')}</span>
         </p>
         <div

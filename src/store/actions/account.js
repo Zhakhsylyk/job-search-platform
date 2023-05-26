@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../constants/api";
-import { apiService } from "../../services";
+import { apiService, handleError } from "../../services";
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 
 
@@ -17,7 +18,7 @@ const initialState = {
 export const signIn = createAsyncThunk(api.signIn, async (data) => {
     const { username, password } = data;
     const response = await apiService.post(`${api.signIn}?password=${password}&username=${username}`)
-    console.log(response.data)
+    Cookies.set('access_token', response.data)
     return response?.data
 })
 
@@ -34,11 +35,12 @@ export const usersSlice = createSlice({
             .addCase(signIn.fulfilled, (state, action) => {
                 state.status = "succeeded"
                 state.users = state.users.concat(action.payload);
-          
+
             })
             .addCase(signIn.rejected, (state, action) => {
                 state.status = "failed"
                 state.error = action.error.message
+                handleError(action.error);
             })
     }
 })

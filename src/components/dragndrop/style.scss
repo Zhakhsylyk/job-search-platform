@@ -6,6 +6,11 @@
   border: 3px #4540db dashed;
   width: 60%;
   margin: auto;
+
+  &_default {
+    @extend .dropzone-div;
+    border: 1px gray solid;
+  }
 }
 
 .dropzone-content {

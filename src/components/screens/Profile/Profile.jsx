@@ -14,14 +14,43 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Dropzone from "../../dragndrop";
 import Button from "@mui/material/Button";
+import Loader from "../../loader/Loader";
+import { toast } from "react-toastify";
+import { AuthService } from "../../../services";
 
 export const Profile = () => {
   const { t } = useTranslation();
   const [uploadBox, setUploadBox] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [files, setFiles] = useState(null);
+
+  // const onDrop = useCallback(acceptedFiles => {
+  //   setFiles(acceptedFiles);
+  // }, [])
 
   const uploadResumeHandler = () => {
-    setUploadBox(true);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setUploadBox(true);
+    }, 500);
   };
+
+  const handleSubmitUpload = async () => {
+    // if (!files) {
+    //   toast.warning('No file accepted yet', {
+    //     position: toast.POSITION.BOTTOM_RIGHT,
+    //   });
+    // }
+    // else {
+    const res = await AuthService.post('/resumes/uploadFile', { file: 'test' })
+    console.log('submitted');
+    toast.success('Resume successfully uploaded!', {
+      position: toast.POSITION.BOTTOM_RIGHT
+    })
+    setUploadBox(false);
+    // }
+  }
   const Main = () => {
     return (
       <div className="profile__main">
@@ -37,7 +66,7 @@ export const Profile = () => {
             </p>
           </div>
         </div>
-        {!uploadBox ? (
+        {!uploadBox && !loading ? (
           <div className="profile__main_outer-block">
             <Link to="/resume">
               <div className="profile__main_outer-block__item">
@@ -53,21 +82,32 @@ export const Profile = () => {
           </div>
         ) : (
           <>
-            <Dropzone accept={"application/pdf"} />
-            <div
-              style={{
-                display: "flex",
-                gap: 10,
-                marginTop: -60,
-              }}
-            >
-              <Button variant="contained" color="success" size="large">
-                Save
-              </Button>
-              <Button variant="contained" color="error" size="large">
-                Cancel
-              </Button>
-            </div>
+            {loading ? (
+              <div style={{ position: 'relative', top: 20 }}>
+                <Loader />
+              </div>
+            )
+              : (
+                <>
+                  <Dropzone accept={"application/pdf"} />
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 10,
+                      marginTop: -50,
+                      marginLeft: '50%'
+                    }}
+                  >
+                    <Button variant="contained" color="success" size="large" onClick={handleSubmitUpload}>
+                      Save
+                    </Button>
+                    <Button variant="contained" color="error" size="large" onClick={() => setUploadBox(false)}>
+                      Cancel
+                    </Button>
+                  </div>
+                </>
+              )
+            }
           </>
         )}
       </div>

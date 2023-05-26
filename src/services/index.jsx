@@ -3,13 +3,18 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
+const baseURL = "http://job-1-env.eba-drhtnqhp.us-east-2.elasticbeanstalk.com";
 
 export const apiService = axios.create({
-  baseURL: "http://job-1-env.eba-drhtnqhp.us-east-2.elasticbeanstalk.com",
-  headers: {
-    // Authorization: `Bearer token`,
-  },
+  baseURL: baseURL,
 });
+
+export const AuthService = axios.create({
+  baseURL: baseURL,
+  headers: {
+    Authorization: `Bearer token`,
+  },
+})
 
 export const handleSuccess = (res) => {
   toast.success('Successfully', {
@@ -19,7 +24,6 @@ export const handleSuccess = (res) => {
 }
 export const handleError = (err) => {
   try {
-
     switch (err.response.status) {
       case 400:
         toast.error(err.message, {
@@ -52,7 +56,6 @@ export const handleError = (err) => {
         })
     }
   } catch {
-
     toast.error('Обратитесь к администратору', {
       position: toast.POSITION.BOTTOM_RIGHT
     })

@@ -17,23 +17,28 @@ import { ToastContainer } from "react-toastify";
 import Loader from "./components/loader/Loader";
 import { Article } from "./components/screens/Blog/article/Article";
 import Form from "./components/screens/Profile/form";
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
+import Protected from "./routes/Protected";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-  // const loadingTime = window.location.href.includes('resume') ? 3000 : 500;
+  const loadingTime = window.location.href.includes('resume') ? 3000 : 500;
 
   useEffect(() => {
     const handleRouteChange = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 500);
+      }, loadingTime);
     };
 
     handleRouteChange();
 
-    return () => {};
+    return () => { };
   }, [location]);
   return (
     <>
@@ -46,10 +51,10 @@ function App() {
           <Route path="/candidates" element={<Candidates />} />
           <Route path="/articles" element={<Blog />} />
           <Route path="/articles/:id" element={<Article />} />
-          <Route path="/me" element={<Profile />} />
+          <Route path="/me" element={<Protected><Profile /></Protected>} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
-          <Route path="/resume" element={<Form />} />
+          <Route path="/resume" element={<Protected><Form /></Protected>} />
           <Route path="*" element={<Error />} />
         </Routes>
       )}

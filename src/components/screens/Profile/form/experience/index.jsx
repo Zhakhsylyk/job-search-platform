@@ -5,9 +5,10 @@ import TextField from "@mui/material/TextField";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 
 import "react-datepicker/dist/react-datepicker.css";
-import Select from "../../../../multi-select/Select";
+import CustomMultiSelect from "../../../../select/MultiSelect";
 import DatePicker from "../../../../datepicker/DatePicker";
 import Input from "../../../../Input/Input";
+import CustomSelect from "../../../../select/Select";
 
 const CustomInput = React.forwardRef((props, ref) => {
   return (
@@ -32,22 +33,46 @@ const CustomInput = React.forwardRef((props, ref) => {
   );
 });
 
-export default function Experience() {
+export default function Experience({ data, setData }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+
+  const handleChange = (name) => e => {
+    setData({ ...data, [name]: e.target.value })
+  }
+
+  console.log(data);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Work Experience
       </Typography>
-      <div style={{ display: "flex", gap: 10 }}>
-        <div style={{ marginTop: 15 }}>
-          <Input />
-        </div>
-        <div style={{ marginTop: 15 }}>
-          <Input />
-        </div>
+      <div >
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="title"
+            name="title"
+            value={data.title}
+            onChange={handleChange('title')}
+            label="Job title"
+            fullWidth
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sx={{ marginTop: 1 }}>
+          <TextField
+            required
+            id="org"
+            name="org"
+            label="Organization"
+            value={data.org}
+            onChange={handleChange('org')}
+            fullWidth
+            variant="standard"
+          />
+        </Grid>
       </div>
       <div
         style={{
@@ -64,8 +89,11 @@ export default function Experience() {
           <DatePicker />
         </div>
       </div>
+      <div style={{ marginTop: 30 }}>
+        <CustomMultiSelect placeholder="Select Skills" type="level" value={data.skills} onChange={handleChange('skills')} />
+      </div>
       <div style={{ marginTop: 30, width: "100%" }}>
-        <Select />
+        <CustomSelect value={data.levels} onChange={handleChange('levels')} />
       </div>
     </React.Fragment>
   );

@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../../store/actions/account";
 import Loader from "../../loader/Loader";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 function Copyright(props) {
   return (
@@ -51,8 +52,8 @@ export default function Login() {
       username: data.get("email"),
       password: data.get("password"),
     };
-    // const res = await apiService.post('/users/signin?password=client&username=client').then(res => navigate('/')).catch(res => navigate('/'), handleError);
-    dispatch(signIn(body)).then(() => navigate('/me'))
+    const res = await apiService.post(`/users/signin?password=${body.password}&username=${body.username}`).then(res => { Cookies.set('jwt_token', res.data); navigate('/me') }).catch(err => handleError(err));
+    // dispatch(signIn(body)).then(() => navigate('/me'))
   };
 
   return (
@@ -85,7 +86,7 @@ export default function Login() {
               required
               fullWidth
               id="email"
-              label= {t('login.email')}
+              label={t('login.email')}
               name="email"
               autoComplete="email"
               autoFocus
@@ -96,14 +97,14 @@ export default function Login() {
               required
               fullWidth
               name="password"
-              label= {t('login.password')}
+              label={t('login.password')}
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label= {t('login.remember')}
+              label={t('login.remember')}
             />
             <Button
               type="submit"
@@ -111,17 +112,17 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-            {t('login.button')}
+              {t('login.button')}
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="/forgot" variant="body2">
-                {t('login.forgot')}
+                  {t('login.forgot')}
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
-                {t('login.signup')}
+                  {t('login.signup')}
                 </Link>
               </Grid>
             </Grid>

@@ -5,7 +5,11 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-export default function Personal() {
+export default function Personal({ data, setData }) {
+  const handleChange = name => event => {
+    setData({ ...data, [name]: event.target.value });
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -15,32 +19,37 @@ export default function Personal() {
         <Grid item xs={12}>
           <TextField
             required
-            id="firstName"
-            name="firstName"
-            label="First name"
+            id="fullName"
+            name="fullName"
+            label="Full name"
+            value={data.name}
+            onChange={handleChange('name')}
             fullWidth
-            autoComplete="given-name"
             variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
-            id="address2"
-            name="address2"
-            label="Address"
+            required
+            id="mobileNumber"
+            name="mobileNumber"
+            label="Contact number"
+            value={data.mobile}
+            onChange={handleChange('mobile')}
             fullWidth
-            autoComplete="shipping address-line2"
             variant="standard"
           />
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
             id="city"
             name="city"
             label="City"
+            value={data.city}
+            onChange={handleChange('city')}
             fullWidth
-            autoComplete="shipping address-level2"
             variant="standard"
           />
         </Grid>
@@ -49,6 +58,8 @@ export default function Personal() {
             id="state"
             name="state"
             label="State/Province/Region"
+            value={data.region}
+            onChange={handleChange('region')}
             fullWidth
             variant="standard"
           />
@@ -58,9 +69,10 @@ export default function Personal() {
             required
             id="country"
             name="country"
+            value={data.country}
+            onChange={handleChange('country')}
             label="Country"
             fullWidth
-            autoComplete="shipping country"
             variant="standard"
           />
         </Grid>

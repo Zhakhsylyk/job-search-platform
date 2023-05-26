@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from "./Header.module.scss";
 import logo from '../../images/jalda-logo.png';
 import kzFlag from '../../images/kazakhstan.png';
 import enFlag from '../../images/usa.png';
 import ruFlag from '../../images/russia.png';
+import candidate from '../../images/candidate.png';
 import Select, { components } from "react-select";
 import { useTranslation } from 'react-i18next';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
+import Divider from '@mui/material/Divider';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
+import Cookies from 'js-cookie';
+
 
 const languages = [
     { value: "kk", label: "ҚАЗ", icon: kzFlag },
@@ -14,12 +26,28 @@ const languages = [
     { value: "ru", label: "РУС", icon: ruFlag },
 ];
 
+
+
 function Header() {
     const { t, i18n } = useTranslation();
     const [selectedLanguage, setSelectedLanguage] = useState(languages.filter(lng => { return lng.value === localStorage.getItem('lng') })[0] ?? languages[0]);
+    const navigate = useNavigate();
 
-    console.log(selectedLanguage);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
 
+    };
+
+    const handleLogout = () => {
+        setAnchorEl(null);
+        Cookies.remove('jwt_token')
+        navigate('/');
+    }
     const Option = (props) => (
         <components.Option {...props} className={styles["language-option"]}>
             <img
@@ -27,7 +55,7 @@ function Header() {
                 alt="logo"
                 className="language-logo"
                 width={18}
-                style={{ position: 'relative', top: 3 }}
+                style={{ position: 'relative', top: 3, marginRight: 10 }}
                 height={18}
             />
             {props.data.label}
@@ -79,16 +107,85 @@ function Header() {
                 </nav>
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <ul >
-                    <li className={styles.li}>
-                        <Link to="/signin" className={styles.link}>{t('navigation.login')}</Link>
-                    </li>
-                    <li>
-                        <Link to='/signup'>
-                            <button className={styles.btn}>{t('navigation.register')}</button>
-                        </Link>
-                    </li>
-                </ul>
+                {!Cookies.get('jwt_token') ?
+                    (
+
+                        <ul>
+                            <li className={styles.li}>
+                                <Link to="/signin" className={styles.link}>{t('navigation.login')}</Link>
+                            </li>
+                            <li>
+                                <Link to='/signup'>
+                                    <button className={styles.btn}>{t('navigation.register')}</button>
+                                </Link>
+                            </li>
+                        </ul>
+
+                    ) : <div style={{ marginRight: 20 }}>
+                        <Tooltip title="Account settings">
+                            <Avatar
+                                src={candidate}
+                                onClick={handleClick}
+                                sx={{ cursor: 'pointer' }}
+                            />
+                        </Tooltip>
+                        <Menu
+                            anchorEl={anchorEl}
+                            id="account-menu"
+                            open={open}
+                            onClose={handleClose}
+                            onClick={handleClose}
+                            PaperProps={{
+                                elevation: 0,
+                                sx: {
+                                    overflow: 'visible',
+                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                    mt: 1.5,
+                                    '& .MuiAvatar-root': {
+                                        width: 32,
+                                        height: 32,
+                                        ml: -0.5,
+                                        mr: 1,
+                                    },
+                                    '&:before': {
+                                        content: '""',
+                                        display: 'block',
+                                        position: 'absolute',
+                                        top: 0,
+                                        right: 14,
+                                        width: 10,
+                                        height: 10,
+                                        bgcolor: 'background.paper',
+                                        transform: 'translateY(-50%) rotate(45deg)',
+                                        zIndex: 0,
+                                    },
+                                },
+                            }}
+                            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                        >
+                            <Link to='/me'>
+                                <MenuItem onClick={handleClose}>
+                                    <Avatar src={candidate} onClick={() => navigate('/me')} /> My account
+                                </MenuItem>
+                            </Link>
+                            <Divider />
+                            <MenuItem onClick={handleClose}>
+                                <ListItemIcon>
+                                    <Settings fontSize="small" />
+                                </ListItemIcon>
+                                Settings
+                            </MenuItem>
+                            <MenuItem onClick={handleLogout}>
+                                <ListItemIcon>
+                                    <Logout fontSize="small" />
+                                </ListItemIcon>
+                                Logout
+                            </MenuItem>
+                        </Menu>
+
+                    </div>
+                }
                 <div style={{ width: 125 }}>
                     <Select
                         value={selectedLanguage}
