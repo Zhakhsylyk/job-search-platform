@@ -16,7 +16,7 @@ import Dropzone from "../../dragndrop";
 import Button from "@mui/material/Button";
 import Loader from "../../loader/Loader";
 import { toast } from "react-toastify";
-import { AuthService } from "../../../services";
+import { AuthService, handleError } from "../../../services";
 
 export const Profile = () => {
   const { t } = useTranslation();
@@ -36,14 +36,20 @@ export const Profile = () => {
     }, 500);
   };
 
+  const onDrop = useCallback(acceptedFiles => {
+    setFiles(acceptedFiles);
+  })
+
   const handleSubmitUpload = async () => {
-    // if (!files) {
-    //   toast.warning('No file accepted yet', {
-    //     position: toast.POSITION.BOTTOM_RIGHT,
-    //   });
-    // }
-    // else {
-    const res = await AuthService.post('/resumes/uploadFile', { file: 'test' })
+    let body = new FormData();
+    body.append('file', files[0].name);
+    console.log(files[0])
+    try {
+      const res = await AuthService({ method: 'post', url: '/resumes/uploadFile', data: body, headers: { "Content-Type": "multipart/form-data" } })
+    }
+    catch (err) {
+      handleError(err);
+    }
     console.log('submitted');
     toast.success('Resume successfully uploaded!', {
       position: toast.POSITION.BOTTOM_RIGHT
@@ -89,7 +95,7 @@ export const Profile = () => {
             )
               : (
                 <>
-                  <Dropzone accept={"application/pdf"} />
+                  <Dropzone accept={"application/pdf"} onDrop={onDrop} files={files} />
                   <div
                     style={{
                       display: "flex",
@@ -101,7 +107,7 @@ export const Profile = () => {
                     <Button variant="contained" color="success" size="large" onClick={handleSubmitUpload}>
                       Save
                     </Button>
-                    <Button variant="contained" color="error" size="large" onClick={() => setUploadBox(false)}>
+                    <Button variant="contained" color="error" size="large" onClick={() => { setUploadBox(false); setFiles(null) }}>
                       Cancel
                     </Button>
                   </div>
@@ -109,8 +115,9 @@ export const Profile = () => {
               )
             }
           </>
-        )}
-      </div>
+        )
+        }
+      </div >
     );
   };
   const Recommendations = () => {

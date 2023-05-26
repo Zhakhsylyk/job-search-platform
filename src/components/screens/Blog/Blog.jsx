@@ -30,17 +30,21 @@ export const Blog = () => {
 
 
     const Main = () => {
+        const totalPages = articles.length;
+        console.log(articles.length);
+        let page = 1;
+        const articlesPage = articles.slice(0, 3);
         return (
             <div className='blog__container'>
                 <div className='blog__content'>
                     <div className='blog__content_articles'>
-                        {articles.map(item => {
+                        {articlesPage.map(item => {
                             return (
                                 <Box data={item} />
                             )
                         })}
                     </div>
-                    <Pagination />
+                    <Pagination totalPages={totalPages} page={page} />
                 </div>
                 <SideBar />
             </div>

@@ -6,7 +6,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor:pointer;
 
+    &:hover{
+        background-color: #4540db;
+        color:#fff;
+    }
     p {
         font-size:1.125rem;
         font-weight: 600;

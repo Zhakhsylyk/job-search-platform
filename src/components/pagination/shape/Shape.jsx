@@ -1,16 +1,17 @@
 import React from 'react'
 import './style.scss';
-import leftArrow from '../../../images/left-arrow.svg';
-import rightArrow from '../../../images/right-arrow.svg';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
-export const Shape = ({ left, right }) => {
+
+export const Shape = ({ left, right, children }) => {
     return (
-        <div className='circle' >
+        <div className='circle' onClick={() => console.log(children)}>
             {left ?
-                <img src={leftArrow} alt='arrow' />
-                : right ? <img src={rightArrow} alt='arrow' />
-                    : <p>01</p>
+                <ArrowBackIosIcon  />
+                : right ? <ArrowForwardIosIcon />
+                    : <p>{children}</p>
             }
         </div>
     )
