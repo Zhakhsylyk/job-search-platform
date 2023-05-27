@@ -6,27 +6,38 @@ import checkPrimary from "../../images/check-primary.svg";
 import check from "../../images/check.svg";
 import { useTranslation } from "react-i18next";
 import { capitalize } from "../../helpers";
+import { Link } from "react-router-dom";
 
 export const CategoryCard = ({ data }) => {
   const { t, i18n } = useTranslation();
   const [selected, setSelected] = useState(false);
   const onMouseEnter = () => {
     setSelected(true);
-  }
+  };
 
   const onMouseLeave = () => {
     setSelected(false);
-  }
+  };
   return (
-    <div className={styles[!selected ? "card__category" : 'card__category--selected']} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <div
+      className={
+        styles[!selected ? "card__category" : "card__category--selected"]
+      }
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className={styles["card__category_inner"]} key={data.id}>
         <div>
           {" "}
           <img src={data.icon} alt="category" />
         </div>
         <div className={styles["card__category_text"]}>
-          <p className={styles.title}>{data.categoryName[`name${capitalize(i18n.language)}`]}</p>
-          <p className={styles.subtitle}>{data.categoryDesc[`name${capitalize(i18n.language)}`]}</p>
+          <p className={styles.title}>
+            {data.categoryName[`name${capitalize(i18n.language)}`]}
+          </p>
+          <p className={styles.subtitle}>
+            {data.categoryDesc[`name${capitalize(i18n.language)}`]}
+          </p>
         </div>
       </div>
     </div>
@@ -47,17 +58,21 @@ export const JobCard = ({ data }) => {
         </div>
       </div>
       <div>
-        <p className={styles["card__job_inner-subtitle"]}>{data.name[`name${capitalize(i18n.language)}`]}</p>
+        <p className={styles["card__job_inner-subtitle"]}>
+          {data.name[`name${capitalize(i18n.language)}`]}
+        </p>
       </div>
       <div>
-        <p className={styles["card__job_inner-time"]}>{data.time[`name${capitalize(i18n.language)}`]}</p>
+        <p className={styles["card__job_inner-time"]}>
+          {data.time[`name${capitalize(i18n.language)}`]}
+        </p>
         <p className={styles["card__job_inner-desc"]}>{data.desc}</p>
       </div>
       <div className={styles["card__job_inner-bottom"]}>
         <p>
-          <span>${data.salary}</span>/{t('job.month')}
+          <span>${data.salary}</span>/{t("job.month")}
         </p>
-        <button>{t('job.apply')}</button>
+        <button>{t("job.apply")}</button>
       </div>
     </div>
   );
@@ -72,15 +87,21 @@ export const SubscriptionCard = (props) => {
       <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
         <img src={icon} alt="sub" height={72} width={72} />
         <div>
-          <p className={styles[`${styleSyllable}__title`]}>{clientType[`name${capitalize(i18n.language)}`]}</p>
-          <p className={styles[`${styleSyllable}__subtitle`]}>{type[`name${capitalize(i18n.language)}`]}</p>
+          <p className={styles[`${styleSyllable}__title`]}>
+            {clientType[`name${capitalize(i18n.language)}`]}
+          </p>
+          <p className={styles[`${styleSyllable}__subtitle`]}>
+            {type[`name${capitalize(i18n.language)}`]}
+          </p>
         </div>
       </div>
       <p className={styles[`${styleSyllable}__description`]}>{desc}</p>
       <p className={styles[`${styleSyllable}__price`]}>
-        <span>{price[i18n.language]} </span>/{t('subscription.month')}
+        <span>{price[i18n.language]} </span>/{t("subscription.month")}
       </p>
-      <p className={styles[`${styleSyllable}__list-title`]}>{t('subscription.included')}</p>
+      <p className={styles[`${styleSyllable}__list-title`]}>
+        {t("subscription.included")}
+      </p>
       <ul>
         <li>
           <img src={id % 2 === 0 ? checkPrimary : check} alt="check" />
@@ -100,18 +121,16 @@ export const SubscriptionCard = (props) => {
           <p>{profitItems[`name${capitalize(i18n.language)}`][3]}</p>
         </li>
       </ul>
-      <button className={styles[`${styleSyllable}__btn`]}>{t('subscription.button')}</button>
+      <button className={styles[`${styleSyllable}__btn`]}>
+        {t("subscription.button")}
+      </button>
     </div>
   );
 };
 
 export const CandidateCard = ({ id, name, desc, score, skills }) => {
   return (
-    <div
-      className={
-        styles[id === 1 ? "card__candidate--selected" : "card__candidate"]
-      }
-    >
+    <div className={styles["card__candidate"]}>
       <img src={candidate} alt="avatar" height={53} width={53} />
       <div></div>
       <p>Alikhan Zhakhsylyk</p>
@@ -120,7 +139,9 @@ export const CandidateCard = ({ id, name, desc, score, skills }) => {
         <div className={styles["rating__score"]}></div>
         <p>95/100</p>
       </div>
-      <button>View Profile</button>
+      <Link to="/candidates/:id">
+        <button>View Profile</button>
+      </Link>
     </div>
   );
 };

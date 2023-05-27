@@ -24,9 +24,8 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
       <Link color="inherit" href="/">
-        Jalda.kz
+        Jalda Software
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -64,7 +63,7 @@ export default function Register() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-          {t('register.title')}
+            {t("register.title")}
           </Typography>
           <Box
             component="form"
@@ -80,7 +79,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="firstName"
-                  label= {t('register.firstname')}
+                  label={t("register.firstname")}
                   autoFocus
                 />
               </Grid>
@@ -89,7 +88,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="lastName"
-                  label={t('register.lastname')}
+                  label={t("register.lastname")}
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -99,7 +98,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="email"
-                  label={t('register.email')}
+                  label={t("register.email")}
                   name="email"
                   autoComplete="email"
                 />
@@ -109,7 +108,7 @@ export default function Register() {
                   required
                   fullWidth
                   name="password"
-                  label={t('register.password')}
+                  label={t("register.password")}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -120,7 +119,7 @@ export default function Register() {
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label={t('register.notification')}
+                  label={t("register.notification")}
                 />
               </Grid>
             </Grid>
@@ -130,12 +129,12 @@ export default function Register() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-            {t('register.button')}
+              {t("register.button")}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/signin" variant="body2">
-                {t('register.login')}
+                  {t("register.login")}
                 </Link>
               </Grid>
             </Grid>

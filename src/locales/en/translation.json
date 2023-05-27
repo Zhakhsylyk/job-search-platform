@@ -51,9 +51,10 @@
         "contact": "Contact"
     },
     "searchbar": {
-        "title": "There are 1.999 Jobs Here For you!",
+        "jobTitle": "There are 1.999 Jobs Here For you!",
         "placeholder": "Backend developer",
-        "button": "Find Now"
+        "button": "Find Now",
+        "candidateTitle": "There are 10.999 Candidates Here For you!"
     },
     "main": {
         "show": "Showing",

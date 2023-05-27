@@ -13,16 +13,15 @@ export const apiService = axios.create({
 export const AuthService = axios.create({
   baseURL: baseURL,
   headers: {
-    Authorization: `Bearer ${Cookies.get('jwt_token')}`,
+    Authorization: `Bearer ${Cookies.get("jwt_token")}`,
   },
-})
+});
 
 export const handleSuccess = (res) => {
-  toast.success('Successfully', {
-    position: toast.POSITION.BOTTOM_RIGHT
-  })
-
-}
+  toast.success("Successfully", {
+    position: toast.POSITION.BOTTOM_RIGHT,
+  });
+};
 export const handleError = (err) => {
   try {
     switch (err.response.status) {
@@ -52,13 +51,13 @@ export const handleError = (err) => {
         });
         break;
       default:
-        toast.error('Обратитесь к администратору', {
-          position: toast.POSITION.BOTTOM_RIGHT
-        })
+        toast.error("Обратитесь к администратору", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
     }
   } catch {
-    toast.error('Обратитесь к администратору', {
-      position: toast.POSITION.BOTTOM_RIGHT
-    })
+    toast.error("Ошибка! Обратитесь к администратору", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
   }
 };

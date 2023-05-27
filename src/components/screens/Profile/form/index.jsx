@@ -19,13 +19,11 @@ import { Link as RouterLink } from "react-router-dom";
 import Personal from "./personal";
 import Experience from "./experience";
 import { hasEmptyFields } from "../../../../helpers";
-import LoadingButton from '@mui/lab/LoadingButton';
-import SaveIcon from '@mui/icons-material/Save';
+import LoadingButton from "@mui/lab/LoadingButton";
+import SaveIcon from "@mui/icons-material/Save";
 import Loader from "../../../loader/Loader";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-
-
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { AuthService, handleError } from "../../../../services";
 
 function Copyright() {
   return (
@@ -42,29 +40,24 @@ function Copyright() {
 
 const steps = ["Personal", "Experience & Skills", "Review"];
 
-
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function Form() {
-
-
-
   const [personalData, setPersonalData] = useState({
-    name: '',
-    mobile: '',
-    city: '',
-    country: '',
-    region: '',
+    name: "",
+    mobile: "",
+    city: "",
+    country: "",
+    region: "",
   });
 
   const [experienceData, setExperienceData] = useState({
-    title: '',
-    org: '',
-    levels: '',
-    skills: '',
+    title: "",
+    org: "",
+    levels: "",
+    skills: "",
   });
-
 
   const [loading, setLoading] = React.useState(false);
 
@@ -77,7 +70,9 @@ export default function Form() {
       case 1:
         return <Experience data={experienceData} setData={setExperienceData} />;
       case 2:
-        return <Review personalData={personalData} experienceData={experienceData} />;
+        return (
+          <Review personalData={personalData} experienceData={experienceData} />
+        );
       default:
         throw new Error("Unknown step");
     }
@@ -87,14 +82,47 @@ export default function Form() {
     setActiveStep(activeStep + 1);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    try {
+      const body = {
+        category: {
+          id: 3,
+        },
+        cityDTO: {
+          id: 2,
+        },
+        description: "asdflkdsjflk lkdsjflkslfad djlasflad",
+        jobExperienceLevel: {
+          id: 2,
+        },
+        salaryExpected: 3000,
+        tags: [
+          {
+            id: 1,
+          },
+          {
+            id: 3,
+          },
+        ],
+        types: [
+          {
+            id: 1,
+          },
+          {
+            id: 2,
+          },
+        ],
+      };
+      const res = await AuthService.post("/resumes/upload", body);
+    } catch (err) {
+      handleError(err);
+    }
     setActiveStep(activeStep + 1);
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-
-  }
+  };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -107,7 +135,7 @@ export default function Form() {
       <Toolbar>
         <img src={logo} witdh={36} height={36} />
       </Toolbar>
-      {!loading ?
+      {!loading ? (
         <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
           <Paper
             variant="outlined"
@@ -118,7 +146,7 @@ export default function Form() {
             </Typography>
             {activeStep === steps.length ? (
               <div style={{ textAlign: "center", marginTop: 20 }}>
-                <CheckCircleIcon color='success' sx={{ fontSize: 64 }} />
+                <CheckCircleIcon color="success" sx={{ fontSize: 64 }} />
                 <Typography variant="h5" gutterBottom>
                   Resume successfully created!
                 </Typography>
@@ -151,10 +179,21 @@ export default function Form() {
 
                   <Button
                     variant="contained"
-                    onClick={activeStep === steps.length - 1 ? handleSave : handleNext}
+                    onClick={
+                      activeStep === steps.length - 1 ? handleSave : handleNext
+                    }
                     sx={{ mt: 3, ml: 1 }}
-                    startIcon={activeStep === steps.length - 1 ? <SaveIcon sx={{ color: '#fff' }} /> : null}
-                    disabled={activeStep === 0 && hasEmptyFields(personalData) || activeStep === 1 && hasEmptyFields(experienceData) ? true : false}
+                    startIcon={
+                      activeStep === steps.length - 1 ? (
+                        <SaveIcon sx={{ color: "#fff" }} />
+                      ) : null
+                    }
+                    disabled={
+                      (activeStep === 0 && hasEmptyFields(personalData)) ||
+                      (activeStep === 1 && hasEmptyFields(experienceData))
+                        ? true
+                        : false
+                    }
                   >
                     {activeStep === steps.length - 1 ? "Save" : "Next"}
                   </Button>
@@ -163,8 +202,10 @@ export default function Form() {
             )}
           </Paper>
           <Copyright />
-        </Container> : <Loader>Saving Resume</Loader>
-      }
+        </Container>
+      ) : (
+        <Loader>Saving Resume</Loader>
+      )}
     </ThemeProvider>
   );
 }

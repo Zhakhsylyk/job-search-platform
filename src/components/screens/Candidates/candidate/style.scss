@@ -1,0 +1,50 @@
+.candidate_profile__main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 200px;
+  gap: 50px;
+  &-left {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &-section_title {
+      color: gray;
+      font-weight: 500;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: flex-end;
+
+      &::after {
+        content: "";
+        flex: 1;
+        margin-left: 10px;
+        border: 1px solid gray;
+      }
+    }
+  }
+  &-right {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &-section_title {
+      color: gray;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: flex-end;
+      margin: 0;
+      &_field {
+        font-weight: 600;
+      }
+    }
+  }
+}

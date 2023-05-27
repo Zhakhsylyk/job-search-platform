@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../../header/Header";
 import styles from "./styles/Home.module.scss";
 import jobSearch from "../../../images/main-picture.png";
 import searchIcon from "../../../images/search-icon.svg";
@@ -12,10 +11,9 @@ import kzFlag from "../../../images/kazakhstan.png";
 import ruFlag from "../../../images/russia.png";
 import { subscriptions } from "../../../constants/subscriptions";
 import resumeLogo from "../../../images/cvPicture.png";
-import { Footer } from "../../footer/Footer";
 import Select, { components } from "react-select";
 import { useTranslation } from "react-i18next";
-
+import { Link } from "react-router-dom";
 
 const countries = [
   { value: "KZT", label: "KZT", icon: kzFlag },
@@ -60,28 +58,23 @@ export const Home = () => {
   const MainBody = () => {
     return (
       <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
-        {i18n.language !== 'kk' ? (
+        {i18n.language !== "kk" ? (
           <div>
             <p className={styles.title}>
-              {t('title.index')} <span>{t('title.primary')}</span> <br />
-              {t('title.next')}
+              {t("title.index")} <span>{t("title.primary")}</span> <br />
+              {t("title.next")}
             </p>
-            <p className={styles.subtitle}>
-              {t('subtitle')}
-            </p>
+            <p className={styles.subtitle}>{t("subtitle")}</p>
           </div>
         ) : (
           <div>
             <p className={styles.title}>
-              {t('title.index')} <br />
-              <span>{t('title.primary')}</span> {t('title.next')}
+              {t("title.index")} <br />
+              <span>{t("title.primary")}</span> {t("title.next")}
             </p>
-            <p className={styles.subtitle}>
-              {t('subtitle')}
-            </p>
+            <p className={styles.subtitle}>{t("subtitle")}</p>
           </div>
-        )
-        }
+        )}
         <div>
           <img
             src={jobSearch}
@@ -98,7 +91,11 @@ export const Home = () => {
     return (
       <div className={styles.search}>
         <img src={searchIcon} alt="search" width={35} height={35} />
-        <input type="text" placeholder={t('searchTitle')} />
+        <input
+          type="text"
+          placeholder={t("searchTitle")}
+          style={{ width: "35%" }}
+        />
         <div className={styles.dividerLine} />
         <img
           src={locationIcon}
@@ -107,8 +104,12 @@ export const Home = () => {
           height={35}
           style={{ marginLeft: 20 }}
         />
-        <input type="text" placeholder={t('searchLocation')} />
-        <button className={styles.btn}>{t('search')}</button>
+        <input
+          type="text"
+          placeholder={t("searchLocation")}
+          style={{ width: "40%" }}
+        />
+        <button className={styles.btn}>{t("search")}</button>
       </div>
     );
   };
@@ -116,8 +117,9 @@ export const Home = () => {
     return (
       <div className={styles["section__category"]}>
         <p style={{ textAlign: "center", fontSize: 50, fontWeight: 500 }}>
-          {t('category.title')}<br />
-          {t('category.titleNext')} <span>{t('category.primary')}</span>
+          {t("category.title")}
+          <br />
+          {t("category.titleNext")} <span>{t("category.primary")}</span>
         </p>
         <div
           style={{
@@ -130,7 +132,14 @@ export const Home = () => {
           }}
         >
           {categories.map((item) => {
-            return <CategoryCard data={item} />;
+            return (
+              <Link
+                to="/jobs"
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                <CategoryCard data={item} />
+              </Link>
+            );
           })}
         </div>
       </div>
@@ -148,7 +157,7 @@ export const Home = () => {
             margin: "78px 0 100px 0",
           }}
         >
-          {t('job.title')} <span>{t('job.primary')}</span> {t('job.titleNext')}
+          {t("job.title")} <span>{t("job.primary")}</span> {t("job.titleNext")}
         </p>
         <div
           style={{
@@ -171,13 +180,14 @@ export const Home = () => {
             color: "#4943DA",
             backgroundColor: "#fff",
             borderRadius: 20,
-            fontSize: '1rem',
+            fontSize: "1rem",
             textAlign: "center",
             margin: "50px auto 0",
+            padding: "13px",
             cursor: "pointer",
           }}
         >
-          {t('job.button')}
+          {t("job.button")}
         </button>
       </div>
     );
@@ -187,7 +197,7 @@ export const Home = () => {
     return (
       <div className={styles["section__subscription"]}>
         <p style={{ textAlign: "center", fontSize: 50, fontWeight: 500 }}>
-          {t('subscription.title')} <span>{t('subscription.primary')}</span>
+          {t("subscription.title")} <span>{t("subscription.primary")}</span>
         </p>
 
         <div
@@ -234,13 +244,13 @@ export const Home = () => {
         >
           <img src={resumeLogo} alt="" />
           <div>
-            <p className={styles["resume__title"]}>
-              {t('resume.text')}
-            </p>
-            <p className={styles["resume__subtitle"]}>
-              {t('resume.subtext')}
-            </p>
-            <button className={styles["resume__btn"]}>{t('resume.button')}</button>
+            <p className={styles["resume__title"]}>{t("resume.text")}</p>
+            <p className={styles["resume__subtitle"]}>{t("resume.subtext")}</p>
+            <Link to="/resume">
+              <button className={styles["resume__btn"]}>
+                {t("resume.button")}
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -248,14 +258,12 @@ export const Home = () => {
   };
   return (
     <React.Fragment>
-      <Header />
       <MainBody />
       <SearchBar />
       <CategoryList />
       <JobList />
       <Subscriptions />
       <ResumeUpload />
-      <Footer />
     </React.Fragment>
   );
 };

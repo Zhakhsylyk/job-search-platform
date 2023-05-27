@@ -73,6 +73,5 @@
     "craco-alias": "^3.0.1",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.27.5"
-  },
-  "proxy": "http://job-1-env.eba-drhtnqhp.us-east-2.elasticbeanstalk.com"
+  }
 }
