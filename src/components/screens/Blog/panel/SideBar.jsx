@@ -5,7 +5,7 @@ import closeIcon from '../../../../images/close-icon.svg';
 import { useTranslation } from 'react-i18next';
 
 export const SideBar = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const BlogKeyword = ({ children }) => {
         return (
             <div className='blog__keyword'>
@@ -28,7 +28,7 @@ export const SideBar = () => {
                 </div>
                 <div className='blog__panel_post-popular_list__item'><img src={popular} alt='index' />
                     <div><p className='blog__panel_post-popular_list__title'>Design Process</p>
-                        <p className='blog__panel_post-popular_list__short--selected'>Our 15 favorite IT positions from August </p></div>
+                        <p className='blog__panel_post-popular_list__short'>Our 15 favorite IT positions from August </p></div>
                 </div>
                 <div className='blog__panel_post-popular_list__item'><img src={popular} alt='index' />
                     <div><p className='blog__panel_post-popular_list__title'>Design Process</p>
@@ -36,19 +36,7 @@ export const SideBar = () => {
                 </div>
             </div>
         </div>
-        <div className='blog__panel_post-recent'>
-            <p className='blog__panel_post-recent_title'>{t('blog.recent')}</p>
-            <div className='blog__panel_post-recent_list'>
-                <div className='blog__panel_post-recent_list__item'><p className='blog__panel_post-recent_list__title'>Design Process</p>
-                    <p className='blog__panel_post-recent_list__short'>Our 15 favorite IT positions from August </p></div>
-                <div className='blog__panel_post-recent_list__item'><p className='blog__panel_post-recent_list__title'>Design Process</p>
-                    <p className='blog__panel_post-recent_list__short--selected'>Our 15 favorite IT positions from August </p></div>
-                <div className='blog__panel_post-recent_list__item'><p className='blog__panel_post-recent_list__title'>Design Process</p>
-                    <p className='blog__panel_post-recent_list__short'>Our 15 favorite IT positions from August </p></div>
-                <div className='blog__panel_post-recent_list__item'><p className='blog__panel_post-recent_list__title'>Design Process</p>
-                    <p className='blog__panel_post-recent_list__short'>Our 15 favorite IT positions from August </p></div>
-            </div>
-        </div>
+
         <div className='blog__panel_keywords'>
             <BlogKeyword>Revenue</BlogKeyword>
             <BlogKeyword>Shipment</BlogKeyword>
@@ -66,3 +54,17 @@ export const SideBar = () => {
         </div>
     </div>)
 }
+
+// <div className='blog__panel_post-recent'>
+// <p className='blog__panel_post-recent_title'>{t('blog.recent')}</p>
+// <div className='blog__panel_post-recent_list'>
+//     <div className='blog__panel_post-recent_list__item'><p className='blog__panel_post-recent_list__title'>Design Process</p>
+//         <p className='blog__panel_post-recent_list__short'>Our 15 favorite IT positions from August </p></div>
+//     <div className='blog__panel_post-recent_list__item'><p className='blog__panel_post-recent_list__title'>Design Process</p>
+//         <p className='blog__panel_post-recent_list__short'>Our 15 favorite IT positions from August </p></div>
+//     <div className='blog__panel_post-recent_list__item'><p className='blog__panel_post-recent_list__title'>Design Process</p>
+//         <p className='blog__panel_post-recent_list__short'>Our 15 favorite IT positions from August </p></div>
+//     <div className='blog__panel_post-recent_list__item'><p className='blog__panel_post-recent_list__title'>Design Process</p>
+//         <p className='blog__panel_post-recent_list__short'>Our 15 favorite IT positions from August </p></div>
+// </div>
+// </div>

@@ -2,7 +2,7 @@ import React from "react";
 import searchIcon from "../../images/search-icon.svg";
 import { AuthService, handleError } from "../../services";
 import { api } from "../../constants/api";
-import Cookies from "js-cookie";
+import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
 
 export const Navigation = ({ candidate, job }) => {
@@ -35,7 +35,6 @@ export const Navigation = ({ candidate, job }) => {
         },
         sortByNewest: true,
       };
-      console.log(Cookies.get("jwt_token"));
       const res = AuthService.post(api.searchVacancies, body);
       console.log(res);
     } catch (err) {

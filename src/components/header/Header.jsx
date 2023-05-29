@@ -17,7 +17,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import Cookies from "js-cookie";
+import Cookies from "universal-cookie";
 
 const languages = [
   { value: "en", label: "ENG", icon: enFlag },
@@ -33,6 +33,7 @@ function Header() {
     })[0] ?? languages[0]
   );
   const navigate = useNavigate();
+  const cookies = new Cookies();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -45,7 +46,7 @@ function Header() {
 
   const handleLogout = () => {
     setAnchorEl(null);
-    Cookies.remove("jwt_token");
+    cookies.remove("jwt_token");
     navigate("/");
   };
   const Option = (props) => (
@@ -113,7 +114,7 @@ function Header() {
         </nav>
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
-        {!Cookies.get("jwt_token") ? (
+        {!cookies.get("jwt_token") ? (
           <ul>
             <li className={styles.li}>
               <Link to="/signin" className={styles.link}>

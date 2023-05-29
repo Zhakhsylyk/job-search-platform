@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useMemo } from "react";
 import { Navigation } from "../../navigation/Navigation";
 import menu from "../../../images/menu.svg";
 import location from "../../../images/location.svg";
@@ -11,6 +11,16 @@ import "./style.scss";
 import { useTranslation } from "react-i18next";
 
 export const Jobs = () => {
+  let PageSize = 3;
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentVacancies = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return vacancies.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
   const { t } = useTranslation();
   const [salary, setSalary] = useState([20, 37]);
   const JobsCatalog = () => {
@@ -18,7 +28,7 @@ export const Jobs = () => {
       <div className="job__container">
         <div className="job__content">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <p>Showing 1-20 of 522 candidates </p>
+            <p>{t('main.show')} 1-20 {t('main.of')} 522 {t('main.candidates')} </p>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <p>{t("main.sort")}:</p>
               <select>
@@ -37,7 +47,7 @@ export const Jobs = () => {
               marginTop: 16,
             }}
           >
-            {vacancies.map((item) => {
+            {currentVacancies.map((item) => {
               return <VacancyCard data={item} />;
             })}
           </div>
@@ -49,7 +59,13 @@ export const Jobs = () => {
               marginBottom: 110,
             }}
           >
-            <Pagination />
+            <Pagination
+              className="pagination-bar"
+              currentPage={currentPage}
+              totalCount={vacancies.length}
+              pageSize={PageSize}
+              onPageChange={page => setCurrentPage(page)}
+            />
           </div>
         </div>
         <div className="job__sidebar">

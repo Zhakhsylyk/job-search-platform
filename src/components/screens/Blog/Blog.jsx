@@ -1,10 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState, useMemo } from "react";
 import { articles } from "../../../constants/articles";
 import { Pagination } from "../../pagination/Pagination";
 import { Box } from "./box/Box";
 import "./styles/style.scss";
 import { SideBar } from "./panel/SideBar";
 import { useTranslation } from "react-i18next";
+import { current } from "@reduxjs/toolkit";
 
 export const Blog = () => {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ export const Blog = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          userSelect:'none',
         }}
       >
         <p style={{ fontSize: "1.125rem", margin: 0 }}>{children}</p>
@@ -42,19 +44,32 @@ export const Blog = () => {
   };
 
   const Main = () => {
-    const totalPages = articles.length;
-    console.log(articles.length);
-    let page = 1;
-    const articlesPage = articles.slice(0, 3);
+    let PageSize = 3;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+
+    const currentArticles = useMemo(() => {
+      const firstPageIndex = (currentPage - 1) * PageSize;
+      const lastPageIndex = firstPageIndex + PageSize;
+      return articles.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage]);
+
     return (
       <div className="blog__container">
         <div className="blog__content">
           <div className="blog__content_articles">
-            {articlesPage.map((item) => {
+            {currentArticles.map((item) => {
               return <Box data={item} />;
             })}
           </div>
-          <Pagination totalPages={totalPages} page={page} />
+          <Pagination
+            className="pagination-bar"
+            currentPage={currentPage}
+            totalCount={articles.length}
+            pageSize={PageSize}
+            onPageChange={page => setCurrentPage(page)}
+          />
         </div>
         <SideBar />
       </div>

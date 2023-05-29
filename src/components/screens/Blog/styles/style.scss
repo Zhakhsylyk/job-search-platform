@@ -83,12 +83,6 @@
                         font-weight: 600;
                         margin: 0;
 
-                        &--selected {
-                            font-weight: 600;
-                            color: #4540DB;
-                            margin: 0;
-
-                        }
                     }
                 }
             }
@@ -100,6 +94,17 @@
                         align-items: center;
                         gap: 26px;
                         cursor: pointer;
+
+                        &:hover {
+                            font-weight: 600;
+                            background-color: #4540DB;
+                            border-radius: 10px;
+
+                            >div p {
+                                color: #fff;
+                            }
+                        }
+
                     }
                 }
             }
@@ -113,6 +118,7 @@
 
                     &__item {
                         cursor: pointer;
+
 
                     }
                 }

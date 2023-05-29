@@ -42,6 +42,7 @@
     "react-toastify": "^9.1.2",
     "react-uuid": "^2.0.0",
     "sass": "^1.62.1",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
