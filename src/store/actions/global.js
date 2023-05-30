@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    loading: false,
-}
+  loading: false,
+};
 
 export const rootSlice = createSlice({
-    name: 'root',
-    initialState,
-    reducers: {}
+  name: "root",
+  initialState,
+  reducers: {},
 });
-
-

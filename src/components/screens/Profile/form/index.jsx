@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -24,6 +24,8 @@ import SaveIcon from "@mui/icons-material/Save";
 import Loader from "../../../loader/Loader";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { AuthService, handleError } from "../../../../services";
+import { useDispatch } from "react-redux";
+import { getCities } from "../../../../store/actions/dictionary";
 
 function Copyright() {
   return (
@@ -58,10 +60,14 @@ export default function Form() {
     levels: "",
     skills: "",
   });
-
+  const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
 
   const [activeStep, setActiveStep] = React.useState(0);
+
+  useEffect(() => {
+    dispatch(getCities());
+  }, []);
 
   function getStepContent(step) {
     switch (step) {

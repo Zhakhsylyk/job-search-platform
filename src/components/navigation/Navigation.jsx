@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export const Navigation = ({ candidate, job }) => {
   const { t } = useTranslation();
-  const searchHandler = () => {
+  const searchHandler = async () => {
     try {
       const body = {
         category: {
@@ -36,7 +36,7 @@ export const Navigation = ({ candidate, job }) => {
         sortByNewest: true,
       };
       console.log(Cookies.get("jwt_token"));
-      const res = AuthService.post(api.searchVacancies, body);
+      const res = await AuthService.post(api.vacancy.search, body);
       console.log(res);
     } catch (err) {
       handleError(err);

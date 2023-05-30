@@ -5,10 +5,10 @@ import './style.scss';
 
 export default function CustomSelect({ value, onChange }) {
     const levels = [
-        { name: 'Junior', code: 'NY' },
-        { name: 'Middle', code: 'RM' },
-        { name: 'Senior', code: 'LDN' },
-        { name: 'Expert', code: 'IST' },
+        { name: 'Junior', id: 1 },
+        { name: 'Middle', id: 2 },
+        { name: 'Senior', code: 3 },
+        { name: 'Expert', code: 4 },
     ];
 
     return (

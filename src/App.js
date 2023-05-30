@@ -26,6 +26,7 @@ import { Candidate } from "./components/screens/Candidates/candidate/Candidate";
 import Header from "./components/header/Header";
 import { Footer } from "./components/footer/Footer";
 import { Layout } from "./routes/Layout";
+import ScrollToTop from "./components/scroll/Scroll";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -37,9 +38,10 @@ function App() {
     : 500;
 
   useEffect(() => {
+    let timeout;
     const handleRouteChange = () => {
       setLoading(true);
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         setLoading(false);
       }, loadingTime);
     };
@@ -50,91 +52,87 @@ function App() {
   }, [location]);
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <Layout>
-                  <Home />
-                </Layout>
-              }
-            />
-            <Route
-              path="/jobs"
-              element={
-                <Layout>
-                  <Jobs />
-                </Layout>
-              }
-            />
-            <Route
-              path="/candidates"
-              element={
-                <Layout>
-                  <Candidates />
-                </Layout>
-              }
-            />
-            <Route
-              path="/candidates/:id"
-              element={
-                <Layout>
-                  <Candidate />
-                </Layout>
-              }
-            />
-            <Route
-              path="/articles"
-              element={
-                <Layout>
-                  <Blog />
-                </Layout>
-              }
-            />
-            <Route
-              path="/articles/:id"
-              element={
-                <Layout>
-                  <Article />
-                </Layout>
-              }
-            />
-            <Route
-              path="/me"
-              element={
-                <Protected>
-                  <Layout>
-                    <Profile />
-                  </Layout>
-                </Protected>
-              }
-            />
-            <Route path="/signin" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
-            <Route
-              path="/resume"
-              element={
-                <Protected>
-                  <Form />
-                </Protected>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <Layout>
-                  <Error />
-                </Layout>
-              }
-            />
-          </Routes>
-        </>
-      )}
+      <ScrollToTop />
+      {loading && <Loader />}
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        />
+        <Route
+          path="/jobs"
+          element={
+            <Layout>
+              <Jobs />
+            </Layout>
+          }
+        />
+        <Route
+          path="/candidates"
+          element={
+            <Layout>
+              <Candidates />
+            </Layout>
+          }
+        />
+        <Route
+          path="/candidates/:id"
+          element={
+            <Layout>
+              <Candidate />
+            </Layout>
+          }
+        />
+        <Route
+          path="/articles"
+          element={
+            <Layout>
+              <Blog />
+            </Layout>
+          }
+        />
+        <Route
+          path="/articles/:id"
+          element={
+            <Layout>
+              <Article />
+            </Layout>
+          }
+        />
+        <Route
+          path="/me"
+          element={
+            <Protected>
+              <Layout>
+                <Profile />
+              </Layout>
+            </Protected>
+          }
+        />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route
+          path="/resume"
+          element={
+            <Protected>
+              <Form />
+            </Protected>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Layout>
+              <Error />
+            </Layout>
+          }
+        />
+      </Routes>
       <ToastContainer />
     </>
   );

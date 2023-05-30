@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles/Home.module.scss";
 import jobSearch from "../../../images/main-picture.png";
 import searchIcon from "../../../images/search-icon.svg";
@@ -37,6 +37,10 @@ const Option = (props) => (
 export const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    console.log("test");
+  }, []);
 
   const handleChange = (value) => {
     setSelectedCountry(value);

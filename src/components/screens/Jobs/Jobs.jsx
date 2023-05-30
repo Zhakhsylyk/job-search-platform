@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Navigation } from "../../navigation/Navigation";
 import menu from "../../../images/menu.svg";
 import location from "../../../images/location.svg";
@@ -9,10 +9,17 @@ import RangeSlider from "../../slider/Slider";
 import { vacancies } from "../../../constants/vacancies";
 import "./style.scss";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { getCities } from "../../../store/actions/dictionary";
 
 export const Jobs = () => {
   const { t } = useTranslation();
   const [salary, setSalary] = useState([20, 37]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCities());
+  }, []);
   const JobsCatalog = () => {
     return (
       <div className="job__container">

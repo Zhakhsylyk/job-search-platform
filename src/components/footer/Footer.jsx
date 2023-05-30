@@ -11,7 +11,7 @@ export const Footer = () => {
         style={{
           position: "absolute",
           height: 214,
-          width: '53vw',
+          width: "53vw",
           background: "#FFF",
           boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.25)",
           margin: "0 auto",
@@ -23,11 +23,11 @@ export const Footer = () => {
           display: "flex",
           alignItems: "center",
           gap: 75,
-          padding: 50
+          padding: 50,
         }}
       >
         <p style={{ fontSize: "2.125rem", width: 534 }}>
-          {t('footer.text')} <span>{t('footer.primary')}</span>
+          {t("footer.text")} <span>{t("footer.primary")}</span>
         </p>
         <div
           style={{
@@ -41,8 +41,8 @@ export const Footer = () => {
             padding: "5px 6px",
           }}
         >
-          <input type="text" placeholder={t('footer.placeholder')} />
-          <button className={styles["btn"]}>{t('footer.button')}</button>
+          <input type="text" placeholder={t("footer.placeholder")} />
+          <button className={styles["btn"]}>{t("footer.button")}</button>
         </div>
       </div>
       <div
@@ -64,9 +64,9 @@ export const Footer = () => {
           <img src={logo} alt="jalda" witdh={36} height={36} />
           <div>
             <ul>
-              <li>{t('footer.about')}</li>
-              <li>{t('footer.jobs')}</li>
-              <li>{t('footer.contact')}</li>
+              <li>{t("footer.about")}</li>
+              <li>{t("footer.jobs")}</li>
+              <li>{t("footer.contact")}</li>
             </ul>
           </div>
           <div style={{ marginRight: 0, marginLeft: "auto" }}>
