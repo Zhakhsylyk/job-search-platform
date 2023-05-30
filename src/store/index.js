@@ -1,16 +1,16 @@
-import { configureStore ,combineReducers} from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { usersSlice } from "./actions/account";
 import { rootSlice } from "./actions/global";
-import { dictionarySlice } from "./actions/dictionary";
-
-const reducer = combineReducers({
-  root: rootSlice,
-  account: usersSlice,
-  dictionary: dictionarySlice,
-});
+import dictionaryReducer from "./actions/dictionary";
+import postsReducer from './actions/posts';
 
 export const store = configureStore({
-  reducer
+  reducer: {
+    root: rootSlice,
+    account: usersSlice,
+    dictionary: dictionaryReducer,
+    posts: postsReducer,
+  }
 });
 
 export default store;

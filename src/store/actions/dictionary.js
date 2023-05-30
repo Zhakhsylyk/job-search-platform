@@ -1,6 +1,6 @@
 import { apiService, AuthService } from "../../services";
 import { api } from "../../constants/api";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   cities: [],
@@ -12,37 +12,47 @@ const initialState = {
   error: '',
 };
 
-export const getCities = () => async (dispatch) => {
-  const response = await apiService.get(api.dictionary.getCities);
-  return response?.data;
-};
+export const getCities = createAsyncThunk(
+  '/getCities',
+  async () => {
+    const response = await apiService.get(api.dictionary.getCities);
+    return response?.data;
+  });
 
-export const getExperienceLevels = () => async (dispatch) => {
-  const response = await apiService.get(api.dictionary.getExperienceLevels);
-  return response?.data;
-};
+export const getExperienceLevels = createAsyncThunk(
+  '/getExperienceLevels',
+  async () => {
+    const response = await apiService.get(api.dictionary.getExperienceLevels);
+    return response?.data;
+  });
 
-export const getJobCategories = () => async (dispatch) => {
-  const response = await apiService.get(api.dictionary.getJobCategories);
-  return response?.data;
-};
+export const getJobCategories = createAsyncThunk(
+  '/getJobCategories',
+  async () => {
+    const response = await apiService.get(api.dictionary.getJobCategories);
+    return response?.data;
+  });
 
-export const getJobSkillTags = () => async (dispatch) => {
-  const response = await apiService.get(api.dictionary.getJobSkillTags);
-  return response?.data;
-};
+export const getJobSkillTags = createAsyncThunk(
+  '/getJobSkillTags',
+  async () => {
+    const response = await apiService.get(api.dictionary.getJobSkillTags);
+    return response?.data;
+  });
 
 
-export const getJobTypes = () => async (dispatch) => {
-  const response = await apiService.get(api.dictionary.getJobTypes);
-  return response?.data;
-};
+export const getJobTypes = createAsyncThunk(
+  '/getJobTypes',
+  async () => {
+    const response = await apiService.get(api.dictionary.getJobTypes);
+    return response?.data;
+  });
 
-export const dictionarySlice = createSlice({
+const dictionarySlice = createSlice({
   name: "dictionary",
   initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(getCities.pending, (state, action) => {
         state.isLoading = true;
@@ -57,3 +67,5 @@ export const dictionarySlice = createSlice({
       });
   },
 });
+
+export default dictionarySlice.reducer;

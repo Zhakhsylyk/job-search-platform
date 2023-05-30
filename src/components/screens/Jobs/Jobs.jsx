@@ -14,9 +14,11 @@ import { Dropdown } from 'primereact/dropdown';
 import { getCities, getExperienceLevels, getJobCategories, getJobSkillTags, getJobTypes } from "../../../store/actions/dictionary";
 
 export const Jobs = () => {
+  const dictionary = useSelector((state) => state.dictionary)
   let PageSize = 3;
 
   const [currentPage, setCurrentPage] = useState(1);
+
 
   const currentVacancies = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
@@ -34,7 +36,12 @@ export const Jobs = () => {
     dispatch(getJobCategories());
     dispatch(getJobSkillTags());
     dispatch(getJobTypes());
-  }, []);
+  }, [dispatch]);
+
+
+  const cities = useSelector((state) => state.dictionary.cities);
+  console.log(cities);
+
 
   const [selectedExperience, setSelectedExperience] = useState(null);
   const [selectedExperienceLevel, setSelectedExperienceLevel] = useState(null);
@@ -42,7 +49,6 @@ export const Jobs = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
 
-  const cities = [{ "id": 1, "name": "Astana" }, { "id": 2, "name": "Kyzylorda" }, { "id": 3, "name": "Almaty" }, { "id": 4, "name": "Shymkent" }]
   const categories = [{ "id": 1, "name": "Backend Developer" }, { "id": 2, "name": "Frontend Developer" }, { "id": 3, "name": "Full-stack Developer" }]
 
   const handleExperienceChange = (event) => {
@@ -59,7 +65,6 @@ export const Jobs = () => {
     setSelectedCategory(null);
     setSelectedCity(null);
   }
-
 
   const JobsCatalog = () => {
     return (

@@ -11,7 +11,6 @@ export default function RangeSlider({ value, onChange }) {
     onChange(newValue);
   };
 
-  console.log(value);
   return (
     <Box sx={{ width: "100%" }}>
       <Slider
