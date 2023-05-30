@@ -26,6 +26,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { AuthService, handleError } from "../../../../services";
 import { useDispatch } from "react-redux";
 import { getCities } from "../../../../store/actions/dictionary";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 function Copyright() {
   return (
@@ -63,6 +64,7 @@ export default function Form() {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
 
+  const [success, setSuccess] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
 
   useEffect(() => {
@@ -120,8 +122,10 @@ export default function Form() {
         ],
       };
       const res = await AuthService.post("/resumes/upload", body);
+      setSuccess(true);
     } catch (err) {
       handleError(err);
+      setSuccess(false);
     }
     setActiveStep(activeStep + 1);
     setLoading(true);
@@ -151,21 +155,35 @@ export default function Form() {
               Build Resume
             </Typography>
             {activeStep === steps.length ? (
-              <div style={{ textAlign: "center", marginTop: 20 }}>
-                <CheckCircleIcon color="success" sx={{ fontSize: 64 }} />
-                <Typography variant="h5" gutterBottom>
-                  Resume successfully created!
-                </Typography>
-                <RouterLink to="/jobs">
-                  <Button
-                    variant="contained"
-                    sx={{ marginTop: 3 }}
-                    endIcon={<SearchIcon sx={{ color: "#fff" }} />}
-                  >
-                    Start Search
-                  </Button>
-                </RouterLink>
-              </div>
+              success ? (
+                <div style={{ textAlign: "center", marginTop: 20 }}>
+                  <CheckCircleIcon color="success" sx={{ fontSize: 64 }} />
+                  <Typography variant="h5" gutterBottom>
+                    Resume successfully created!
+                  </Typography>
+                  <RouterLink to="/jobs">
+                    <Button
+                      variant="contained"
+                      sx={{ marginTop: 3 }}
+                      endIcon={<SearchIcon sx={{ color: "#fff" }} />}
+                    >
+                      Start Search
+                    </Button>
+                  </RouterLink>
+                </div>
+              ) : (
+                <div style={{ textAlign: "center", marginTop: 20 }}>
+                  <CancelIcon color="error" sx={{ fontSize: 64 }} />
+                  <Typography variant="h5" gutterBottom>
+                    Resume creation failed!
+                  </Typography>
+                  <RouterLink to="/me">
+                    <Button variant="contained" sx={{ marginTop: 3 }}>
+                      Try Again
+                    </Button>
+                  </RouterLink>
+                </div>
+              )
             ) : (
               <React.Fragment>
                 <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>

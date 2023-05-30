@@ -6,7 +6,10 @@ import checkPrimary from "../../images/check-primary.svg";
 import check from "../../images/check.svg";
 import { useTranslation } from "react-i18next";
 import { capitalize } from "../../helpers";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Link } from "react-router-dom";
+import WorkIcon from '@mui/icons-material/Work';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 export const CategoryCard = ({ data }) => {
   const { t, i18n } = useTranslation();
@@ -154,11 +157,22 @@ export const VacancyCard = ({ data }) => {
           <img src={data.icon} alt="index" />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <p>{data.position}</p>
-            <div style={{ display: "flex", marginTop: 9, gap: 43 }}>
-              <p>{data.company}</p>
-              <p>{data.location}</p>
-              <p>{data.type}</p>
-              <p>{data.published}</p>
+            <div style={{ display: "flex", marginTop: 9, gap: 43, alignItems: 'flex-end' }}>
+              <div>
+                <p>{data.company}</p>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <LocationOnIcon sx={{ color: '#CCCCCC' }} />
+                <p>{data.location}</p>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4 }}>
+                <WorkIcon sx={{ color: '#CCCCCC' }} />
+                <p>{data.type}</p>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <AccessTimeIcon sx={{ color: '#CCCCCC' }} />
+                <p>{data.published}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -182,7 +196,7 @@ export const FeatureCard = ({ children, color }) => {
   return (
     <div
       className={styles["card__feature"]}
-      style={{ backgroundColor: color, padding: 1 }}
+      style={{ backgroundColor: color }}
     >
       <p style={{ fontSize: "0.75rem" }}>{children}</p>
     </div>

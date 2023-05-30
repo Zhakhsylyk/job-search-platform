@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import "./styles/style.scss";
 import menu from "../../../images/menu.svg";
 import location from "../../../images/location.svg";
@@ -11,13 +11,24 @@ import { Navigation } from "../../navigation/Navigation";
 import { useTranslation } from "react-i18next";
 
 export const Candidates = () => {
+  let PageSize = 8;
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+
+  const currentCandidates = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return candidates.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
   const { t } = useTranslation();
   const CandidatesCatalog = () => {
     return (
       <div className="candidate__container">
         <div className="candidate__content">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <p>Showing 1-20 of 522 candidates </p>
+            <p>{t('main.show')} 1-20 {t('main.of')} 522 {t('main.candidates')}</p>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <p>Sort by:</p>
               <select>
@@ -36,7 +47,7 @@ export const Candidates = () => {
               marginTop: 16,
             }}
           >
-            {candidates.map((item) => {
+            {currentCandidates.map((item) => {
               return (
                 <CandidateCard
                   id={item.id}
@@ -55,7 +66,13 @@ export const Candidates = () => {
               marginBottom: 110,
             }}
           >
-            <Pagination />
+            <Pagination
+              className="pagination-bar"
+              currentPage={currentPage}
+              totalCount={candidates.length}
+              pageSize={PageSize}
+              onPageChange={page => setCurrentPage(page)}
+            />
           </div>
         </div>
         <div className="candidate__sidebar">

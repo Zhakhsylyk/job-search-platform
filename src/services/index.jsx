@@ -2,9 +2,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import Cookies from "js-cookie";
+import Cookies from "universal-cookie";
 
 const baseURL = "http://job-1-env.eba-drhtnqhp.us-east-2.elasticbeanstalk.com";
+
+const cookies = new Cookies();
 
 export const apiService = axios.create({
   baseURL: baseURL,
@@ -13,7 +15,7 @@ export const apiService = axios.create({
 export const AuthService = axios.create({
   baseURL: baseURL,
   headers: {
-    Authorization: `Bearer ${Cookies.get("jwt_token")}`,
+    Authorization: `Bearer ${cookies.get("jwt_token") ? cookies.get('jwt_token') : 'test'}`,
   },
 });
 

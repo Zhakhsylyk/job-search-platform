@@ -59,6 +59,7 @@
     "main": {
         "show": "Showing",
         "candidates": "candidates",
+        "of": "of",
         "sort": "Sort by",
         "new": "Newest",
         "old": "Oldest",
@@ -120,11 +121,11 @@
         "button": "Sign up",
         "login": "Already have an account? Sign in"
     },
-    "profile" : {
-        "username":"Username",
-        "email":"Email",
-        "create":"Start a new resume",
-        "upload":"Upload existing resume",
-        "recommendations":"Recommendations"
+    "profile": {
+        "username": "Username",
+        "email": "Email",
+        "create": "Start a new resume",
+        "upload": "Upload existing resume",
+        "recommendations": "Recommendations"
     }
 }

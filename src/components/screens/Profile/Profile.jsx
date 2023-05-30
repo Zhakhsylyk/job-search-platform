@@ -15,7 +15,6 @@ import Button from "@mui/material/Button";
 import Loader from "../../loader/Loader";
 import { toast } from "react-toastify";
 import { AuthService, handleError } from "../../../services";
-import Cookies from "js-cookie";
 
 export const Profile = () => {
   const { t } = useTranslation();
@@ -44,7 +43,6 @@ export const Profile = () => {
     body.append("file", files[0]);
     try {
       setLoading(true);
-      console.log(Cookies.get("jwt_token"));
       const res = await AuthService({
         method: "post",
         url: "/resumes/uploadFile",

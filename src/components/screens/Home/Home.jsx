@@ -177,22 +177,24 @@ export const Home = () => {
             return <JobCard data={item} />;
           })}
         </div>
-        <button
-          style={{
-            display: "block",
-            border: "solid 2px #4943DA",
-            color: "#4943DA",
-            backgroundColor: "#fff",
-            borderRadius: 20,
-            fontSize: "1rem",
-            textAlign: "center",
-            margin: "50px auto 0",
-            padding: "13px",
-            cursor: "pointer",
-          }}
-        >
-          {t("job.button")}
-        </button>
+        <Link to='/jobs'>
+          <button
+            style={{
+              display: "block",
+              border: "solid 2px #4943DA",
+              color: "#4943DA",
+              backgroundColor: "#fff",
+              borderRadius: 20,
+              fontSize: "1rem",
+              textAlign: "center",
+              margin: "50px auto 0",
+              padding: "13px",
+              cursor: "pointer",
+            }}
+          >
+            {t("job.button")}
+          </button>
+        </Link>
       </div>
     );
   };

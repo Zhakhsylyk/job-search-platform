@@ -2,7 +2,7 @@ import React from "react";
 import searchIcon from "../../images/search-icon.svg";
 import { AuthService, handleError } from "../../services";
 import { api } from "../../constants/api";
-import Cookies from "js-cookie";
+import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
 
 export const Navigation = ({ candidate, job }) => {

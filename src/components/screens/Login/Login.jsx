@@ -18,8 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../../store/actions/account";
 import Loader from "../../loader/Loader";
 import { useTranslation } from "react-i18next";
-import Cookies from "js-cookie";
 import { api } from "../../../constants/api";
+import Cookies from "universal-cookie";
 
 function Copyright(props) {
   return (
@@ -45,6 +45,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cookies = new Cookies();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -56,7 +57,6 @@ export default function Login() {
       const res = await apiService.post(
         `${api.users.signIn}?password=${body.password}&username=${body.username}`
       );
-      console.log(res.data);
       Cookies.set("jwt_token", res.data);
       console.log(res);
       navigate("/me");
