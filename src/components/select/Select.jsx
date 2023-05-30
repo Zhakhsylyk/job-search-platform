@@ -14,7 +14,7 @@ export default function CustomSelect({ value, onChange }) {
     return (
         <div className="card flex">
             <Dropdown value={value} onChange={onChange} options={levels} optionLabel="name"
-                editable placeholder="Select Experience Level" className="w-full" />
+                editable placeholder="Select Experience Level" className="w-full custom-dropdown" />
         </div>
     )
 }

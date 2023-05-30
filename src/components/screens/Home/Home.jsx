@@ -140,8 +140,9 @@ export const Home = () => {
               <Link
                 to="/jobs"
                 style={{ color: "inherit", textDecoration: "inherit" }}
+                key={item.id}
               >
-                <CategoryCard data={item} />
+                <CategoryCard data={item} key={item.id} />
               </Link>
             );
           })}
@@ -174,23 +175,12 @@ export const Home = () => {
           }}
         >
           {jobs.map((item) => {
-            return <JobCard data={item} />;
+            return <JobCard data={item} key={item.id} />;
           })}
         </div>
         <Link to='/jobs'>
           <button
-            style={{
-              display: "block",
-              border: "solid 2px #4943DA",
-              color: "#4943DA",
-              backgroundColor: "#fff",
-              borderRadius: 20,
-              fontSize: "1rem",
-              textAlign: "center",
-              margin: "50px auto 0",
-              padding: "13px",
-              cursor: "pointer",
-            }}
+            className={styles['section__job_button']}
           >
             {t("job.button")}
           </button>
@@ -222,6 +212,7 @@ export const Home = () => {
                 clientType={item.clientType}
                 desc={item.desc}
                 price={item.price}
+                key={item.id}
                 profitItems={item.profits}
                 icon={item.icon}
               />

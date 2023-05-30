@@ -51,6 +51,7 @@ export const Candidates = () => {
               return (
                 <CandidateCard
                   id={item.id}
+                  key={item.id}
                   name={item.name}
                   desc={item.desc}
                   skills={item.skills}
@@ -122,7 +123,7 @@ export const Candidates = () => {
                 name="base"
                 style={{ width: "10%" }}
               />
-              <label for="scales">{t("sidebar.experience.junior")}</label>
+              <label htmlFor="scales">{t("sidebar.experience.junior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -131,7 +132,7 @@ export const Candidates = () => {
                 name="medium"
                 style={{ width: "10%" }}
               />
-              <label for="medium">{t("sidebar.experience.middle")}</label>
+              <label htmlFor="medium">{t("sidebar.experience.middle")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -140,7 +141,7 @@ export const Candidates = () => {
                 name="advanced"
                 style={{ width: "10%" }}
               />
-              <label for="advanced">{t("sidebar.experience.senior")}</label>
+              <label htmlFor="advanced">{t("sidebar.experience.senior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -149,7 +150,7 @@ export const Candidates = () => {
                 name="pro"
                 style={{ width: "10%" }}
               />
-              <label for="pro">{t("sidebar.experience.expert")}</label>
+              <label htmlFor="pro">{t("sidebar.experience.expert")}</label>
             </div>
           </div>
           <p>{t("sidebar.experienceLevel.title")}</p>
@@ -161,7 +162,7 @@ export const Candidates = () => {
                 name="expert"
                 style={{ width: "10%" }}
               />
-              <label for="expert">{t("sidebar.experienceLevel.expert")}</label>
+              <label htmlFor="expert">{t("sidebar.experienceLevel.expert")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -170,7 +171,7 @@ export const Candidates = () => {
                 name="senior"
                 style={{ width: "10%" }}
               />
-              <label for="senior">{t("sidebar.experienceLevel.senior")}</label>
+              <label htmlFor="senior">{t("sidebar.experienceLevel.senior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -179,7 +180,7 @@ export const Candidates = () => {
                 name="junior"
                 style={{ width: "10%" }}
               />
-              <label for="junior">{t("sidebar.experienceLevel.junior")}</label>
+              <label htmlFor="junior">{t("sidebar.experienceLevel.junior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -188,7 +189,7 @@ export const Candidates = () => {
                 name="middle"
                 style={{ width: "10%" }}
               />
-              <label for="middle">{t("sidebar.experienceLevel.middle")}</label>
+              <label htmlFor="middle">{t("sidebar.experienceLevel.middle")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -197,7 +198,7 @@ export const Candidates = () => {
                 name="internship"
                 style={{ width: "10%" }}
               />
-              <label for="internship">
+              <label htmlFor="internship">
                 {t("sidebar.experienceLevel.internship")}
               </label>
             </div>

@@ -17,6 +17,8 @@ export default function RangeSlider({ value, onChange }) {
       <Slider
         getAriaLabel={() => "Salary range"}
         value={value}
+        min={100}
+        max={10000}
         onChange={handleChange}
         getAriaValueText={valuetext}
       />

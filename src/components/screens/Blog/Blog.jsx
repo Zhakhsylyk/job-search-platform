@@ -20,7 +20,7 @@ export const Blog = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          userSelect:'none',
+          userSelect: 'none',
         }}
       >
         <p style={{ fontSize: "1.125rem", margin: 0 }}>{children}</p>
@@ -60,7 +60,7 @@ export const Blog = () => {
         <div className="blog__content">
           <div className="blog__content_articles">
             {currentArticles.map((item) => {
-              return <Box data={item} />;
+              return <Box data={item} key={item.id} />;
             })}
           </div>
           <Pagination

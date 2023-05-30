@@ -9,8 +9,9 @@ import RangeSlider from "../../slider/Slider";
 import { vacancies } from "../../../constants/vacancies";
 import "./style.scss";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { getCities } from "../../../store/actions/dictionary";
+import { useDispatch, useSelector } from "react-redux";
+import { Dropdown } from 'primereact/dropdown';
+import { getCities, getExperienceLevels, getJobCategories, getJobSkillTags, getJobTypes } from "../../../store/actions/dictionary";
 
 export const Jobs = () => {
   let PageSize = 3;
@@ -24,12 +25,42 @@ export const Jobs = () => {
   }, [currentPage]);
 
   const { t } = useTranslation();
-  const [salary, setSalary] = useState([20, 37]);
+  const [salary, setSalary] = useState([100, 5000]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCities());
+    dispatch(getExperienceLevels());
+    dispatch(getJobCategories());
+    dispatch(getJobSkillTags());
+    dispatch(getJobTypes());
   }, []);
+
+  const [selectedExperience, setSelectedExperience] = useState(null);
+  const [selectedExperienceLevel, setSelectedExperienceLevel] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+
+  const cities = [{ "id": 1, "name": "Astana" }, { "id": 2, "name": "Kyzylorda" }, { "id": 3, "name": "Almaty" }, { "id": 4, "name": "Shymkent" }]
+  const categories = [{ "id": 1, "name": "Backend Developer" }, { "id": 2, "name": "Frontend Developer" }, { "id": 3, "name": "Full-stack Developer" }]
+
+  const handleExperienceChange = (event) => {
+    setSelectedExperience(event.target.value);
+  };
+  const handleExperienceLevelChange = (event) => {
+    setSelectedExperienceLevel(event.target.value);
+  };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    setSelectedExperience(null);
+    setSelectedExperienceLevel(null);
+    setSelectedCategory(null);
+    setSelectedCity(null);
+  }
+
+
   const JobsCatalog = () => {
     return (
       <div className="job__container">
@@ -57,7 +88,7 @@ export const Jobs = () => {
             }}
           >
             {currentVacancies.map((item) => {
-              return <VacancyCard data={item} />;
+              return <VacancyCard data={item} key={item.id} />;
             })}
           </div>
           <div
@@ -84,17 +115,8 @@ export const Jobs = () => {
               {" "}
               <img src={location} alt="location" />
             </div>
-            <input
-              type="text"
-              placeholder={t("sidebar.locationText")}
-              style={{
-                border: "1px solid #DDDDDD",
-                height: 48,
-                borderRadius: 10,
-                width: "100%",
-              }}
-              className="job__sidebar_input"
-            />
+            <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name"
+              placeholder={t('sidebar.locationText')} className="w-full" />
           </div>
 
           <p>{t("sidebar.category")}</p>
@@ -103,17 +125,8 @@ export const Jobs = () => {
               {" "}
               <img src={position} alt="position" />
             </div>
-            <input
-              type="text"
-              placeholder={t("sidebar.categoryText")}
-              style={{
-                border: "1px solid #DDDDDD",
-                height: 48,
-                borderRadius: 10,
-                width: "100%",
-              }}
-              className="job__sidebar_input"
-            />
+            <Dropdown value={selectedCategory} onChange={(e) => setSelectedCategory(e.value)} options={categories} optionLabel="name"
+              placeholder={t('sidebar.categoryText')} className="w-full" />
           </div>
           <p>{t("sidebar.experience.title")}</p>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -122,36 +135,48 @@ export const Jobs = () => {
                 type="checkbox"
                 id="base"
                 name="base"
+                value="base"
+                checked={selectedExperience === "base"}
+                onChange={handleExperienceChange}
                 style={{ width: "10%" }}
               />
-              <label for="scales">{t("sidebar.experience.junior")}</label>
+              <label htmlFor="base">{t("sidebar.experience.junior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
                 type="checkbox"
                 id="medium"
                 name="medium"
+                value="medium"
+                checked={selectedExperience === "medium"}
+                onChange={handleExperienceChange}
                 style={{ width: "10%" }}
               />
-              <label for="medium">{t("sidebar.experience.middle")}</label>
+              <label htmlFor="medium">{t("sidebar.experience.middle")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
                 type="checkbox"
                 id="advanced"
                 name="advanced"
+                value="advanced"
+                checked={selectedExperience === "advanced"}
+                onChange={handleExperienceChange}
                 style={{ width: "10%" }}
               />
-              <label for="advanced">{t("sidebar.experience.senior")}</label>
+              <label htmlFor="advanced">{t("sidebar.experience.senior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
                 type="checkbox"
                 id="pro"
                 name="pro"
+                value="pro"
+                checked={selectedExperience === "pro"}
+                onChange={handleExperienceChange}
                 style={{ width: "10%" }}
               />
-              <label for="pro">{t("sidebar.experience.expert")}</label>
+              <label htmlFor="pro">{t("sidebar.experience.expert")}</label>
             </div>
           </div>
           <p>{t("sidebar.experienceLevel.title")}</p>
@@ -161,45 +186,60 @@ export const Jobs = () => {
                 type="checkbox"
                 id="expert"
                 name="expert"
+                value="expert"
+                checked={selectedExperienceLevel === "expert"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
-              <label for="expert">{t("sidebar.experienceLevel.expert")}</label>
+              <label htmlFor="expert">{t("sidebar.experienceLevel.expert")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
                 type="checkbox"
                 id="senior"
                 name="senior"
+                value="senior"
+                checked={selectedExperienceLevel === "senior"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
-              <label for="senior">{t("sidebar.experienceLevel.senior")}</label>
+              <label htmlFor="senior">{t("sidebar.experienceLevel.senior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
                 type="checkbox"
                 id="junior"
                 name="junior"
+                value="junior"
+                checked={selectedExperienceLevel === "junior"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
-              <label for="junior">{t("sidebar.experienceLevel.junior")}</label>
+              <label htmlFor="junior">{t("sidebar.experienceLevel.junior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
                 type="checkbox"
                 id="middle"
                 name="middle"
+                value="middle"
+                checked={selectedExperienceLevel === "middle"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
-              <label for="middle">{t("sidebar.experienceLevel.middle")}</label>
+              <label htmlFor="middle">{t("sidebar.experienceLevel.middle")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
                 type="checkbox"
                 id="internship"
                 name="internship"
+                value="internship"
+                checked={selectedExperienceLevel === "internship"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
-              <label for="internship">
+              <label htmlFor="internship">
                 {t("sidebar.experienceLevel.internship")}
               </label>
             </div>
@@ -212,6 +252,7 @@ export const Jobs = () => {
               <input
                 type="text"
                 placeholder={salary[0]}
+                disabled
                 style={{
                   border: "1px solid #DDDDDD",
                   height: 33,
@@ -225,6 +266,7 @@ export const Jobs = () => {
               <input
                 type="text"
                 placeholder={salary[1]}
+                disabled
                 style={{
                   border: "1px solid #DDDDDD",
                   height: 33,
@@ -236,7 +278,7 @@ export const Jobs = () => {
           </div>
           <div style={{ position: "absolute", bottom: 16 }}>
             <button>{t("sidebar.apply")}</button>
-            <button>{t("sidebar.reset")}</button>
+            <button onClick={handleReset}>{t("sidebar.reset")}</button>
           </div>
         </div>
       </div>

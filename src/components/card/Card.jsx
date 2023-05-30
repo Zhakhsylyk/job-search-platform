@@ -151,7 +151,7 @@ export const CandidateCard = ({ id, name, desc, score, skills }) => {
 
 export const VacancyCard = ({ data }) => {
   return (
-    <div className={styles["card__vacancy"]}>
+    <div className={styles["card__vacancy"]} key={data.id}>
       <div>
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
           <img src={data.icon} alt="index" />

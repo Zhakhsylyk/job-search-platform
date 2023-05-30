@@ -68,8 +68,8 @@
     "sidebar": {
         "location": "Location",
         "category": "Category",
-        "locationText": "Astana",
-        "categoryText": "Backend",
+        "locationText": "Select a city",
+        "categoryText": "Select a category",
         "experience": {
             "title": "Experience",
             "junior": "0-2 years",

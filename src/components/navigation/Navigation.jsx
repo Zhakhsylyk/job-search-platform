@@ -1,14 +1,18 @@
 import React from "react";
 import searchIcon from "../../images/search-icon.svg";
-import { AuthService, handleError } from "../../services";
+import { apiService, AuthService, handleError } from "../../services";
 import { api } from "../../constants/api";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 export const Navigation = ({ candidate, job }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const searchHandler = async () => {
     try {
+
       const body = {
         category: {
           id: 1,
@@ -35,10 +39,11 @@ export const Navigation = ({ candidate, job }) => {
         },
         sortByNewest: true,
       };
-      console.log(Cookies.get("jwt_token"));
-      const res = await AuthService.post(api.vacancy.search, body);
+      const res = await apiService.post(api.vacancy.search, body);
       console.log(res);
-    } catch (err) {
+      navigate(`?page=${res.data.pageNumber}`)
+    }
+    catch (err) {
       handleError(err);
     }
   };

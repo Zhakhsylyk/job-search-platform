@@ -74,6 +74,25 @@ input:focus {
 .section__job {
   padding: 0;
   min-height: 1054px;
+
+  &_button {
+    display: block;
+    border: solid 2px #4943DA;
+    color: #4943DA;
+    background-color: #fff;
+    border-radius: 20px;
+    font-size: 1rem;
+    text-align: center;
+    margin: 50px auto 0;
+    padding: 13px;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #4943DA;
+      color: #fff,
+    }
+  }
 }
 
 .section__subscription {

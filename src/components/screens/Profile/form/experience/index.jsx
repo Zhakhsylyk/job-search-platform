@@ -82,7 +82,7 @@ export default function Experience({ data, setData }) {
           gap: 10,
         }}
       >
-        <div style={{ width: "50%" }}>
+        <div style={{ width: "100%" }}>
           <DatePicker />
         </div>
         <div>

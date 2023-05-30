@@ -68,8 +68,8 @@
     "sidebar": {
         "location": "Местоположение",
         "category": "Категория",
-        "locationText": "Астана",
-        "categoryText": "Бэкенд",
+        "locationText": "Выберите город",
+        "categoryText": "Выберите категорию",
         "experience": {
             "title": "Опыт",
             "junior": "0-2 года",

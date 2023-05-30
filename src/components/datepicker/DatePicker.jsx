@@ -7,7 +7,7 @@ export default function DatePicker() {
 
   return (
     <div className="card flex">
-      <span className="p-float-label">
+      <span className="p-float-label custom-datepicker">
         <Calendar
           inputId="birth_date"
           value={date}

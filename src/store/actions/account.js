@@ -6,9 +6,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-
-
-
 const initialState = {
     users: [],
     status: "",
