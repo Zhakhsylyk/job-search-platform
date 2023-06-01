@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import searchIcon from "../../images/search-icon.svg";
 import { apiService, AuthService, handleError } from "../../services";
 import { api } from "../../constants/api";
@@ -6,16 +6,23 @@ import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import './style.scss';
 
 export const Navigation = ({ candidate, job }) => {
+  const [inputValue, setInputValue] = useState(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  }
   const searchHandler = async () => {
     try {
 
       const body = {
         category: {
           id: 1,
+          name: inputValue
         },
         city: {
           id: 2,
@@ -58,6 +65,8 @@ export const Navigation = ({ candidate, job }) => {
           type="text"
           placeholder={t("searchbar.placeholder")}
           style={{ width: "80%" }}
+          value={inputValue}
+          onChange={handleChange}
         />
         <button onClick={searchHandler}>{t("searchbar.button")}</button>
       </div>

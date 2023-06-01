@@ -3,12 +3,18 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-
+import { InputNumber } from 'primereact/inputnumber';
 import "react-datepicker/dist/react-datepicker.css";
 import CustomMultiSelect from "../../../../select/MultiSelect";
 import DatePicker from "../../../../datepicker/DatePicker";
 import Input from "../../../../Input/Input";
 import CustomSelect from "../../../../select/Select";
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+
+
 
 const CustomInput = React.forwardRef((props, ref) => {
   return (
@@ -42,7 +48,7 @@ export default function Experience({ data, setData }) {
     setData({ ...data, [name]: e.target.value })
   }
 
-  console.log(data);
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -93,7 +99,23 @@ export default function Experience({ data, setData }) {
         <CustomMultiSelect placeholder="Select Skills" type="level" value={data.skills} onChange={handleChange('skills')} />
       </div>
       <div style={{ marginTop: 30, width: "100%" }}>
-        <CustomSelect value={data.levels} onChange={handleChange('levels')} />
+        <CustomSelect value={data.levels} onChange={handleChange('levels')} levelSelector />
+      </div>
+      <div style={{ marginTop: 30, width: "100%" }}>
+        <CustomSelect value={data.types} onChange={handleChange('types')} />
+      </div>
+      <div className="p-inputgroup" style={{ marginTop: 30, width: "100%" }}>
+        <FormControl fullWidth >
+          <InputLabel htmlFor="outlined-adornment-amount">Salary</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount"
+            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            label="Amount"
+            value={data.salary}
+            onChange={handleChange('salary')}
+            type="number"
+          />
+        </FormControl>
       </div>
     </React.Fragment>
   );

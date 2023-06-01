@@ -13,7 +13,7 @@ import { subscriptions } from "../../../constants/subscriptions";
 import resumeLogo from "../../../images/cvPicture.png";
 import Select, { components } from "react-select";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const countries = [
   { value: "KZT", label: "KZT", icon: kzFlag },
@@ -37,6 +37,7 @@ const Option = (props) => (
 export const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("test");
@@ -45,6 +46,10 @@ export const Home = () => {
   const handleChange = (value) => {
     setSelectedCountry(value);
   };
+
+  const handleFind = () => {
+    navigate('/jobs');
+  }
 
   const SingleValue = ({ children, ...props }) => (
     <components.SingleValue {...props}>
@@ -113,7 +118,7 @@ export const Home = () => {
           placeholder={t("searchLocation")}
           style={{ width: "40%" }}
         />
-        <button className={styles.btn}>{t("search")}</button>
+        <button className={styles.btn} onClick={handleFind}>{t("search")}</button>
       </div>
     );
   };

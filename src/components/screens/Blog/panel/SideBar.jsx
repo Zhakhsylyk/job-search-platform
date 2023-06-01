@@ -3,6 +3,9 @@ import searchIcon from '../../../../images/search-icon.svg';
 import popular from '../../../../images/popular.png';
 import closeIcon from '../../../../images/close-icon.svg';
 import { useTranslation } from 'react-i18next';
+import { articles } from '../../../../constants/articles';
+import { Link } from 'react-router-dom';
+
 
 export const SideBar = () => {
     const { t } = useTranslation();
@@ -14,6 +17,9 @@ export const SideBar = () => {
             </div>
         )
     }
+    const newArticles = articles;
+    const topArticles = newArticles.sort((a, b) => b.likes - a.likes).slice(0, 3);
+
     return (<div className='blog__panel'>
         <div className='blog__panel_search'>
             <img src={searchIcon} alt="search" width={35} height={35} />
@@ -22,37 +28,24 @@ export const SideBar = () => {
         <div className='blog__panel_post-popular'>
             <p className='blog__panel_post-popular_title'>{t('blog.popular')}</p>
             <div className='blog__panel_post-popular_list'>
-                <div className='blog__panel_post-popular_list__item'><img src={popular} alt='index' />
-                    <div><p className='blog__panel_post-popular_list__title'>Design Process</p>
-                        <p className='blog__panel_post-popular_list__short'>Our 15 favorite IT positions from August </p></div>
-                </div>
-                <div className='blog__panel_post-popular_list__item'><img src={popular} alt='index' />
-                    <div><p className='blog__panel_post-popular_list__title'>Design Process</p>
-                        <p className='blog__panel_post-popular_list__short'>Our 15 favorite IT positions from August </p></div>
-                </div>
-                <div className='blog__panel_post-popular_list__item'><img src={popular} alt='index' />
-                    <div><p className='blog__panel_post-popular_list__title'>Design Process</p>
-                        <p className='blog__panel_post-popular_list__short'>Our 15 favorite IT positions from August </p></div>
-                </div>
+                {
+                    topArticles.map(article => {
+                        return (<Link to={`/articles/${article.id}`}><div className='blog__panel_post-popular_list__item'><img src={article.image} alt='index' width={90} height={70} style={{ borderRadius: 10 }} />
+                            <div><p className='blog__panel_post-popular_list__title'>{article.category}</p>
+                                <p className='blog__panel_post-popular_list__short'>{article.title}</p></div>
+                        </div></Link>
+                        )
+                    })
+                }
             </div>
         </div>
 
         <div className='blog__panel_keywords'>
-            <BlogKeyword>Revenue</BlogKeyword>
-            <BlogKeyword>Shipment</BlogKeyword>
-            <BlogKeyword>Shipment</BlogKeyword>
-            <BlogKeyword>Shipment</BlogKeyword>
-            <BlogKeyword>Shipment</BlogKeyword>
-            <BlogKeyword>Shipment</BlogKeyword>
-            <BlogKeyword>Shipment</BlogKeyword>
-            <BlogKeyword>Sale</BlogKeyword>
-            <BlogKeyword>Sale</BlogKeyword>
-            <BlogKeyword>Sale</BlogKeyword>
-            <BlogKeyword>Sale</BlogKeyword>
-            <BlogKeyword>Sale</BlogKeyword>
-            <BlogKeyword>Sale</BlogKeyword>
+            <BlogKeyword>Recruitment</BlogKeyword>
+            <BlogKeyword>IT</BlogKeyword>
+            <BlogKeyword>Job Tips</BlogKeyword>
         </div>
-    </div>)
+    </div >)
 }
 
 // <div className='blog__panel_post-recent'>

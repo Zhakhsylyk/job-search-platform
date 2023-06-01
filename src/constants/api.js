@@ -15,7 +15,7 @@ export const api = {
     resumes: "/resumes",
     downloadFile: "/resumes/downloadFile",
     getCurrentUser: "/resumes/my",
-    search: "/resumes/search",
+  search: "/resumes/search",
     upload: "/resumes/upload",
     uploadFile: "/resumes/uploadFile",
   },

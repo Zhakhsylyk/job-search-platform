@@ -68,8 +68,12 @@
     "sidebar": {
         "location": "Местоположение",
         "category": "Категория",
+        "type": "Тип",
+        "skills": "Навыки",
         "locationText": "Выберите город",
         "categoryText": "Выберите категорию",
+        "typeText": "Выберите тип",
+        "skillsText": "Выберите навыки",
         "experience": {
             "title": "Опыт",
             "junior": "0-2 года",

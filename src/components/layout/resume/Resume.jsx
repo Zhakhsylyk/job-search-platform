@@ -4,6 +4,7 @@ import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 
 const ListItem = styled('li')(({ theme }) => ({
@@ -14,13 +15,13 @@ export const Resume = ({ data }) => {
     const handlePrint = () => alert("Printing");
 
     return (
-        <>
+        <React.Fragment>
             <main className='container'>
                 <header className='header'>
                     <div>
                         <h1>{[personalData.name]}</h1>
                         <p className='resumeTitle'>
-                           Location:  {personalData.city}, {personalData.country}
+                            Location:  {personalData.city}, {personalData.country}
                         </p>
                         <p className='resumeTitle headerTitle'>
                             Contact Number: {personalData.mobile}
@@ -72,7 +73,7 @@ export const Resume = ({ data }) => {
                     </div>
                     <div>
                         <h2 className='resumeBodyTitle'>JOB RESPONSIBILITIES</h2>
-                        <p>{experienceData.skills.map((data) => {
+                        <div>{experienceData.skills.map((data) => {
                             return (
                                 <ListItem key={data.code}>
                                     <Chip
@@ -81,10 +82,10 @@ export const Resume = ({ data }) => {
                                     />
                                 </ListItem>
                             );
-                        })}</p>
+                        })}</div>
                     </div>
                 </div>
             </main>
-        </>
+        </React.Fragment>
     );
 };

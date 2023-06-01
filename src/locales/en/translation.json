@@ -68,8 +68,12 @@
     "sidebar": {
         "location": "Location",
         "category": "Category",
+        "type": "Type",
+        "skills": "Skills",
         "locationText": "Select a city",
         "categoryText": "Select a category",
+        "typeText": "Select a type",
+        "skillsText": "Select a skills",
         "experience": {
             "title": "Experience",
             "junior": "0-2 years",

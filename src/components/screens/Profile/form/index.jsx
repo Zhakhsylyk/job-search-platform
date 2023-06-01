@@ -24,8 +24,8 @@ import SaveIcon from "@mui/icons-material/Save";
 import Loader from "../../../loader/Loader";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { AuthService, handleError } from "../../../../services";
-import { useDispatch } from "react-redux";
-import { getCities } from "../../../../store/actions/dictionary";
+import { useDispatch, useSelector } from "react-redux";
+import { getCities, getExperienceLevels, getJobCategories, getJobSkillTags, getJobTypes } from "../../../../store/actions/dictionary";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 function Copyright() {
@@ -60,6 +60,8 @@ export default function Form() {
     org: "",
     levels: "",
     skills: "",
+    types: "",
+    salary: "",
   });
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
@@ -69,8 +71,13 @@ export default function Form() {
 
   useEffect(() => {
     dispatch(getCities());
+    dispatch(getJobCategories());
+    dispatch(getJobSkillTags());
+    dispatch(getJobTypes());
+    dispatch(getExperienceLevels());
   }, []);
 
+  console.log(experienceData)
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -94,33 +101,17 @@ export default function Form() {
     try {
       const body = {
         category: {
-          id: 3,
+          id: 1
         },
         cityDTO: {
           id: 2,
         },
-        description: "asdflkdsjflk lkdsjflkslfad djlasflad",
-        jobExperienceLevel: {
-          id: 2,
-        },
-        salaryExpected: 3000,
-        tags: [
-          {
-            id: 1,
-          },
-          {
-            id: 3,
-          },
-        ],
-        types: [
-          {
-            id: 1,
-          },
-          {
-            id: 2,
-          },
-        ],
-      };
+        description: `${JSON.stringify(personalData)}`,
+        jobExperienceLevel: experienceData.levels,
+        salaryExpected: experienceData.salary,
+        tags: experienceData.skills,
+        types: [experienceData.types]
+      }
       const res = await AuthService.post("/resumes/upload", body);
       setSuccess(true);
     } catch (err) {
@@ -134,6 +125,7 @@ export default function Form() {
     }, 2000);
   };
 
+  console.log(experienceData);
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
@@ -214,7 +206,7 @@ export default function Form() {
                     }
                     disabled={
                       (activeStep === 0 && hasEmptyFields(personalData)) ||
-                      (activeStep === 1 && hasEmptyFields(experienceData))
+                        (activeStep === 1 && hasEmptyFields(experienceData))
                         ? true
                         : false
                     }

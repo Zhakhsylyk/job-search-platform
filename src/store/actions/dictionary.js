@@ -64,7 +64,51 @@ const dictionarySlice = createSlice({
       .addCase(getCities.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
-      });
+      })
+      .addCase(getJobSkillTags.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getJobSkillTags.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.skills = action.payload;
+      })
+      .addCase(getJobSkillTags.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(getExperienceLevels.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getExperienceLevels.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.levels = action.payload;
+      })
+      .addCase(getExperienceLevels.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(getJobCategories.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getJobCategories.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.categories = action.payload;
+      })
+      .addCase(getJobCategories.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(getJobTypes.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getJobTypes.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.types = action.payload;
+      })
+      .addCase(getJobTypes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
   },
 });
 

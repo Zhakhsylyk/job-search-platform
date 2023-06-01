@@ -57,7 +57,7 @@ export default function Login() {
       const res = await apiService.post(
         `${api.users.signIn}?password=${body.password}&username=${body.username}`
       );
-      Cookies.set("jwt_token", res.data);
+      cookies.set("jwt_token", res.data);
       console.log(res);
       navigate("/me");
     } catch {

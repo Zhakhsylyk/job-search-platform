@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MultiSelect } from "primereact/multiselect";
+import { useSelector } from "react-redux";
 
 export default function CustomMultiSelect({
   placeholder,
@@ -7,13 +8,7 @@ export default function CustomMultiSelect({
   value,
   onChange,
 }) {
-  const skills = [
-    { name: "JavaScript", id: "1" },
-    { name: "PHP", id: 2 },
-    { name: "Python", id: 3 },
-    { name: "Java", id: 4 },
-    { name: "Go", id: 5 },
-  ];
+  const skills = useSelector(state => state.dictionary.skills)
 
   return (
     <div className="card flex">

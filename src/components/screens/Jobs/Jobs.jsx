@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Dropdown } from 'primereact/dropdown';
 import { getCities, getExperienceLevels, getJobCategories, getJobSkillTags, getJobTypes } from "../../../store/actions/dictionary";
+import { AuthService, handleError } from "../../../services";
+import { api } from "../../../constants/api";
 
 export const Jobs = () => {
   const dictionary = useSelector((state) => state.dictionary)
@@ -40,16 +42,17 @@ export const Jobs = () => {
 
 
   const cities = useSelector((state) => state.dictionary.cities);
-  console.log(cities);
+  const categories = useSelector(state => state.dictionary.categories);
+  const types = useSelector(state => state.dictionary.types);
 
 
   const [selectedExperience, setSelectedExperience] = useState(null);
   const [selectedExperienceLevel, setSelectedExperienceLevel] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedType, setSelectedType] = useState(null);
 
 
-  const categories = [{ "id": 1, "name": "Backend Developer" }, { "id": 2, "name": "Frontend Developer" }, { "id": 3, "name": "Full-stack Developer" }]
 
   const handleExperienceChange = (event) => {
     setSelectedExperience(event.target.value);
@@ -57,6 +60,28 @@ export const Jobs = () => {
   const handleExperienceLevelChange = (event) => {
     setSelectedExperienceLevel(event.target.value);
   };
+
+  const handleFilterSubmit = async (e) => {
+    e.preventDefault();
+    const body = {
+      category: selectedCategory,
+      city: selectedCity,
+      jobExperienceLevel: selectedExperienceLevel,
+      jobType: [selectedType],
+      maxSalary: salary[1],
+      minSalary: salary[0],
+      pageRequestDTO: {
+        pageNumber: 1,
+        pageSize: 20,
+      },
+      sortByNewest: true,
+    };
+    try {
+      const res = await AuthService.post(api.vacancy.search, body);
+    } catch (err) {
+      handleError(err);
+    }
+  }
 
   const handleReset = (e) => {
     e.preventDefault();
@@ -133,6 +158,15 @@ export const Jobs = () => {
             <Dropdown value={selectedCategory} onChange={(e) => setSelectedCategory(e.value)} options={categories} optionLabel="name"
               placeholder={t('sidebar.categoryText')} className="w-full" />
           </div>
+          <p>{t("sidebar.type")}</p>
+          <div className="job__sidebar_input-wrapper">
+            <div className="job__sidebar_input-icon">
+              {" "}
+              <img src={position} alt="position" />
+            </div>
+            <Dropdown value={selectedType} onChange={(e) => setSelectedType(e.value)} options={types} optionLabel="name"
+              placeholder={t('sidebar.typeText')} className="w-full" />
+          </div>
           <p>{t("sidebar.experience.title")}</p>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex" }}>
@@ -203,8 +237,8 @@ export const Jobs = () => {
                 type="checkbox"
                 id="senior"
                 name="senior"
-                value="senior"
-                checked={selectedExperienceLevel === "senior"}
+                value="3"
+                checked={selectedExperienceLevel === "3"}
                 onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
@@ -215,8 +249,8 @@ export const Jobs = () => {
                 type="checkbox"
                 id="junior"
                 name="junior"
-                value="junior"
-                checked={selectedExperienceLevel === "junior"}
+                value="1"
+                checked={selectedExperienceLevel === "1"}
                 onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
@@ -227,8 +261,8 @@ export const Jobs = () => {
                 type="checkbox"
                 id="middle"
                 name="middle"
-                value="middle"
-                checked={selectedExperienceLevel === "middle"}
+                value="2"
+                checked={selectedExperienceLevel === "2"}
                 onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
@@ -251,7 +285,7 @@ export const Jobs = () => {
           </div>
           <p>{t("sidebar.salaryRange")}</p>
           <RangeSlider value={salary} onChange={setSalary} />
-          <div style={{ display: "flex", marginTop: 32 }}>
+          <div style={{ display: "flex", marginTop: 12 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <span className="range__title">{t("sidebar.from")}</span>
               <input
@@ -282,7 +316,7 @@ export const Jobs = () => {
             </div>
           </div>
           <div style={{ position: "absolute", bottom: 16 }}>
-            <button>{t("sidebar.apply")}</button>
+            <button onClick={handleFilterSubmit}>{t("sidebar.apply")}</button>
             <button onClick={handleReset}>{t("sidebar.reset")}</button>
           </div>
         </div>

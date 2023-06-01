@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "./styles/style.scss";
 import menu from "../../../images/menu.svg";
 import location from "../../../images/location.svg";
@@ -9,12 +9,45 @@ import { Pagination } from "../../pagination/Pagination";
 import RangeSlider from "../../slider/Slider";
 import { Navigation } from "../../navigation/Navigation";
 import { useTranslation } from "react-i18next";
+import { Dropdown } from 'primereact/dropdown';
+import { getCities, getExperienceLevels, getJobCategories, getJobSkillTags, getJobTypes } from "../../../store/actions/dictionary";
+import { useDispatch, useSelector } from "react-redux";
+import { MultiSelect } from "primereact/multiselect";
+
+
 
 export const Candidates = () => {
   let PageSize = 8;
+  const { t } = useTranslation();
+
+
+  const [salary, setSalary] = useState([100, 5000]);
+
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  const dispatch = useDispatch();
+
+
+  const [selectedExperience, setSelectedExperience] = useState(null);
+  const [selectedExperienceLevel, setSelectedExperienceLevel] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSkills, setSelectedSkills] = useState(null);
+
+
+  useEffect(() => {
+    dispatch(getCities());
+    dispatch(getExperienceLevels());
+    dispatch(getJobCategories());
+    dispatch(getJobSkillTags());
+    dispatch(getJobTypes());
+  }, [dispatch]);
+
+  const cities = useSelector((state) => state.dictionary.cities);
+  const categories = useSelector(state => state.dictionary.categories);
+  const types = useSelector(state => state.dictionary.types);
+  const skills = useSelector(state => state.dictionary.skills);
 
   const currentCandidates = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
@@ -22,7 +55,43 @@ export const Candidates = () => {
     return candidates.slice(firstPageIndex, lastPageIndex);
   }, [currentPage]);
 
-  const { t } = useTranslation();
+
+  const handleExperienceChange = (event) => {
+    setSelectedExperience(event.target.value);
+  };
+  const handleExperienceLevelChange = (event) => {
+    setSelectedExperienceLevel(event.target.value);
+  };
+
+  const handleFilterSubmit = async (e) => {
+    e.preventDefault();
+    const body = {
+      category: selectedCategory,
+      city: selectedCity,
+      jobExperienceLevel: selectedExperienceLevel,
+      jobType: [selectedType],
+      maxSalary: salary[1],
+      minSalary: salary[0],
+      pageRequestDTO: {
+        pageNumber: 1,
+        pageSize: 20,
+      },
+      sortByNewest: true,
+    };
+    try {
+      const res = await AuthService.post(api.vacancy.search, body);
+    } catch (err) {
+      handleError(err);
+    }
+  }
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    setSelectedExperience(null);
+    setSelectedExperienceLevel(null);
+    setSelectedCategory(null);
+    setSelectedCity(null);
+  }
   const CandidatesCatalog = () => {
     return (
       <div className="candidate__container">
@@ -83,17 +152,8 @@ export const Candidates = () => {
               {" "}
               <img src={location} alt="location" />
             </div>
-            <input
-              type="text"
-              placeholder={t("sidebar.locationText")}
-              style={{
-                border: "1px solid #DDDDDD",
-                height: 48,
-                borderRadius: 10,
-                width: "100%",
-              }}
-              className="candidate__sidebar_input"
-            />
+            <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name"
+              placeholder={t('sidebar.locationText')} className="w-full" />
           </div>
 
           <p>{t("sidebar.category")}</p>
@@ -102,16 +162,23 @@ export const Candidates = () => {
               {" "}
               <img src={position} alt="position" />
             </div>
-            <input
-              type="text"
-              placeholder={t("sidebar.categoryText")}
-              style={{
-                border: "1px solid #DDDDDD",
-                height: 48,
-                borderRadius: 10,
-                width: "100%",
-              }}
-              className="candidate__sidebar_input"
+            <Dropdown value={selectedCategory} onChange={(e) => setSelectedCategory(e.value)} options={categories} optionLabel="name"
+              placeholder={t('sidebar.categoryText')} className="w-full" />
+          </div>
+          <p>{t("sidebar.skills")}</p>
+          <div className="candidate__sidebar_input-wrapper">
+            <div className="candidate__sidebar_input-icon">
+              {" "}
+              <img src={position} alt="position" />
+            </div>
+            <MultiSelect
+              value={selectedSkills}
+              onChange={(e) => setSelectedSkills(e.value)}
+              options={skills}
+              optionLabel="name"
+              filter
+              placeholder={t('sidebar.skillsText')}
+              className="w-full"
             />
           </div>
           <p>{t("sidebar.experience.title")}</p>
@@ -121,15 +188,21 @@ export const Candidates = () => {
                 type="checkbox"
                 id="base"
                 name="base"
+                value="base"
+                checked={selectedExperience === "base"}
+                onChange={handleExperienceChange}
                 style={{ width: "10%" }}
               />
-              <label htmlFor="scales">{t("sidebar.experience.junior")}</label>
+              <label htmlFor="base">{t("sidebar.experience.junior")}</label>
             </div>
             <div style={{ display: "flex" }}>
               <input
                 type="checkbox"
                 id="medium"
                 name="medium"
+                value="medium"
+                checked={selectedExperience === "medium"}
+                onChange={handleExperienceChange}
                 style={{ width: "10%" }}
               />
               <label htmlFor="medium">{t("sidebar.experience.middle")}</label>
@@ -139,6 +212,9 @@ export const Candidates = () => {
                 type="checkbox"
                 id="advanced"
                 name="advanced"
+                value="advanced"
+                checked={selectedExperience === "advanced"}
+                onChange={handleExperienceChange}
                 style={{ width: "10%" }}
               />
               <label htmlFor="advanced">{t("sidebar.experience.senior")}</label>
@@ -148,6 +224,9 @@ export const Candidates = () => {
                 type="checkbox"
                 id="pro"
                 name="pro"
+                value="pro"
+                checked={selectedExperience === "pro"}
+                onChange={handleExperienceChange}
                 style={{ width: "10%" }}
               />
               <label htmlFor="pro">{t("sidebar.experience.expert")}</label>
@@ -160,6 +239,9 @@ export const Candidates = () => {
                 type="checkbox"
                 id="expert"
                 name="expert"
+                value="expert"
+                checked={selectedExperienceLevel === "expert"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
               <label htmlFor="expert">{t("sidebar.experienceLevel.expert")}</label>
@@ -169,6 +251,9 @@ export const Candidates = () => {
                 type="checkbox"
                 id="senior"
                 name="senior"
+                value="3"
+                checked={selectedExperienceLevel === "3"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
               <label htmlFor="senior">{t("sidebar.experienceLevel.senior")}</label>
@@ -178,6 +263,9 @@ export const Candidates = () => {
                 type="checkbox"
                 id="junior"
                 name="junior"
+                value="1"
+                checked={selectedExperienceLevel === "1"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
               <label htmlFor="junior">{t("sidebar.experienceLevel.junior")}</label>
@@ -187,6 +275,9 @@ export const Candidates = () => {
                 type="checkbox"
                 id="middle"
                 name="middle"
+                value="2"
+                checked={selectedExperienceLevel === "2"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
               <label htmlFor="middle">{t("sidebar.experienceLevel.middle")}</label>
@@ -196,6 +287,9 @@ export const Candidates = () => {
                 type="checkbox"
                 id="internship"
                 name="internship"
+                value="internship"
+                checked={selectedExperienceLevel === "internship"}
+                onChange={handleExperienceLevelChange}
                 style={{ width: "10%" }}
               />
               <label htmlFor="internship">
@@ -204,13 +298,14 @@ export const Candidates = () => {
             </div>
           </div>
           <p>{t("sidebar.salaryRange")}</p>
-          <RangeSlider />
-          <div style={{ display: "flex", marginTop: 32 }}>
+          <RangeSlider value={salary} onChange={setSalary} />
+          <div style={{ display: "flex", marginTop: 12 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <span className="range__title">{t("sidebar.from")}</span>
               <input
                 type="text"
-                placeholder="1600"
+                placeholder={salary[0]}
+                disabled
                 style={{
                   border: "1px solid #DDDDDD",
                   height: 33,
@@ -223,7 +318,8 @@ export const Candidates = () => {
               <span className="range__title">{t("sidebar.to")}</span>
               <input
                 type="text"
-                placeholder="1600"
+                placeholder={salary[1]}
+                disabled
                 style={{
                   border: "1px solid #DDDDDD",
                   height: 33,
@@ -234,8 +330,8 @@ export const Candidates = () => {
             </div>
           </div>
           <div style={{ position: "absolute", bottom: 16 }}>
-            <button>{t("sidebar.apply")}</button>
-            <button>{t("sidebar.reset")}</button>
+            <button onClick={handleFilterSubmit}>{t("sidebar.apply")}</button>
+            <button onClick={handleReset}>{t("sidebar.reset")}</button>
           </div>
         </div>
       </div>

@@ -27,8 +27,9 @@
     }
 
     &__content {
+        margin:0 auto;
         float: left;
-        width: 50%;
+        width: 60%;
 
         &_articles {
             display: flex;
@@ -38,7 +39,7 @@
 
     &__panel {
         float: right;
-        width: 34%;
+        width: 40%;
         display: flex;
         gap: 15px;
         flex-direction: column;
@@ -89,9 +90,14 @@
 
             &-popular {
                 &_list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
                     &__item {
                         display: flex;
                         align-items: center;
+                        padding: 5px;
                         gap: 26px;
                         cursor: pointer;
 

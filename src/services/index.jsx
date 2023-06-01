@@ -15,7 +15,7 @@ export const apiService = axios.create({
 export const AuthService = axios.create({
   baseURL: baseURL,
   headers: {
-    Authorization: `Bearer ${cookies.get("jwt_token") ? cookies.get('jwt_token') : 'test'}`,
+    Authorization: `Bearer ${cookies.get("jwt_token") ? cookies.get('jwt_token') : null}`,
   },
 });
 
